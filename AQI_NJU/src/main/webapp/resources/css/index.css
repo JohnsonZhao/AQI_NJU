@@ -1,0 +1,143 @@
+nav ul a,
+nav .brand-logo {
+    color: #FFF;
+}
+
+.map {
+
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#loading {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: black;
+    z-index: 999;
+}
+
+#loading img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    min-height: 50px;
+}
+
+nav {
+    position: fixed;
+    z-index: 200;
+}
+
+.leaflet_common {
+    width: 290px;
+}
+
+/*popup content color*/
+.leaflet_level1 {
+    border-left: #00E400 solid 5px;
+}
+
+.leaflet_level2 {
+    border-left: #FFFF00 solid 5px;
+}
+
+.leaflet_level3 {
+    border-left: #FF7E00 solid 5px;
+}
+
+.leaflet_level4 {
+    border-left: #FF0000 solid 5px;
+}
+
+.leaflet_level5 {
+    border-left: #99004C solid 5px;
+}
+
+.leaflet_level6 {
+    border-left: #7E0023 solid 5px;
+}
+
+.leaflet_common dt {
+    padding: 10px 0px 0px 20px;
+}
+
+.leaflet_common dt p.leaflet_location {
+    font-size: 24px;
+    color: #555;
+    padding-bottom: 5px;
+}
+
+.leaflet_common dt p.leaflet_location a {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+.leaflet_common dt p.leaflet_date {
+    font-size: 12px;
+}
+
+.leaflet_common dd {
+    text-align: center;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    min-height: 100px;
+    margin: auto;
+}
+
+.leaflet_common dd p {
+    float: left;
+    display: block;
+    width: 33%;
+    font-size: 12px;
+    text-align: center;
+    color: #555;
+}
+
+.leaflet_info {
+    display: block;
+    line-height: 60px;
+    font-size: 24px;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 10px 0px 5px 15px;
+}
+
+.leaflet_info_border_level1 {
+    border: #6eb720 solid 2px;
+    color: #6eb720;
+}
+
+.leaflet_info_border_level2 {
+    border: #FFFF66 solid 2px;
+    color: #EBE80A;
+}
+
+.leaflet_info_border_level3 {
+    border: #FF7E00 solid 2px;
+    color: #FF7E00;
+}
+
+.leaflet_info_border_level4 {
+    border: #FF0000 solid 2px;
+    color: #FF0000;
+}
+
+.leaflet_info_border_level5 {
+    border: #99004C solid 2px;
+    color: #99004C;
+}
+
+.leaflet_info_border_level6 {
+    border: #7E0023 solid 2px;
+    color: #7E0023;
+}

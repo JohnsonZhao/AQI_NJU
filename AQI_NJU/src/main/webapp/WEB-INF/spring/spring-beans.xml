@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 配置sessionFactory -->
+	<bean id="AirQualityDao" class="edu.nju.aqi.dao.impl.AirQualityDaoImpl">
+	    <property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	    
+	<bean id="MonitoringSitesDao" class="edu.nju.aqi.dao.impl.MonitoringSitesDaoImpl">
+	    <property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	
+	<bean id="AirQualityService" class="edu.nju.aqi.service.impl.AirQualityServiceImpl">
+		<property name="AirQualityDao">
+			<ref bean="AirQualityDao" />
+		</property>
+	</bean>
+	
+	<bean id="MonitoringSitesService" class="edu.nju.aqi.service.impl.MonitoringSitesServiceImpl">
+		<property name="MonitoringSitesDao">
+			<ref bean="MonitoringSitesDao" />
+		</property>
+	</bean>
+	
+	<!-- <bean id="AirQualityController" class="edu.nju.aqi.controller.AirQualityController">
+		<property name="AirQualityService">
+			<ref bean="AirQualityService" />
+		</property>
+	</bean> -->
+	<!-- 此处为代理 -->
+	<bean name="AirQualityManager" parent="transactionProxy">
+		<property name="target" ref="AirQualityService"></property>
+	</bean>
+	
+	<bean name="MonitoringSitesManager" parent="transactionProxy">
+		<property name="target" ref="MonitoringSitesService"></property>
+	</bean>
+
+	<!-- 要调用的工作类 -->
+	<bean id="SchedulerJob" class="edu.nju.aqi.quartz.SchedulerJob">
+	    <property name="AirQualityService">
+			<ref bean="AirQualityService" />
+		</property>
+		<property name="MonitoringSitesService">
+			<ref bean="MonitoringSitesService" />
+		</property>
+	</bean>
+
+	<bean id="jobtask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="SchedulerJob" />
+		</property>
+		<property name="targetMethod">
+			<value>work</value>
+		</property>
+	</bean>
+	<bean id="doTime" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="jobtask" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 * * * ?</value><!-- <value>0 15/1 20 * * ?</value> -->
+		</property>
+	</bean>
+	<bean id="startQuertz" lazy-init="false" autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="doTime" />
+			</list>
+		</property>
+	</bean>
+	
+</beans>

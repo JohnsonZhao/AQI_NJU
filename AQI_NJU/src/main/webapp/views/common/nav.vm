@@ -1,0 +1,21 @@
+<nav role="navigation" style="background-color: rgba(17, 17, 17, 0.45)">
+    <div class="nav-wrapper container">
+        <a id="logo-container" href="#" class="brand-logo">AirNow</a>
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <div id="search" style="display: none;">
+                    <form action="/present/getSpecificCity" method="get">
+                        <input placeholder="Search City" id="city-name" class="form-control" type="text" name="cityName">
+                    </form>
+                </div>
+            </li>
+            <li>
+                <a href="#!" id="toggle-search" >
+                    <i class="large mdi-action-search">
+                    </i>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</nav>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<header>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>MyAQI</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="resources/dep/materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="resources/dep/materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet'/>
+    <link href='resources/css/index.css' rel='stylesheet'/>
+</header>
+<body>
+<div id="loading">
+    <img src="resources/images/loading.jpg" align="middle"/>
+</div>
+
+#parse("/common/nav.vm")
+
+
+<div id="map" class="map">
+
+</div>
+
+
+<script type="text/javascript" src="resources/dep/jquery/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="resources/dep/materialize/js/materialize.js"></script>
+<script type="text/javascript" src="resources/js/sea.js"></script>
+<script type="text/javascript" src="resources/js/sea-modules/conf/common.js"></script>
+<script>
+    seajs.use(['map','nav'], function (map, nav) {
+        map.init();
+        nav.toggleSearch();
+    });
+
+</script>
+</body>
+</html>
+
