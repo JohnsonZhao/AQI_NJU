@@ -11,7 +11,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 		<property name="url" value="jdbc:mysql://localhost:3306/sap"></property>
 		<property name="username" value="root"></property>
-		<property name="password" value=""></property>
+		<property name="password" value="root"></property>
         <property name="connectionProperties">
             <props>
                 <prop key="useUnicode">yes</prop>
@@ -29,6 +29,7 @@
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
+				<prop key="current_session_context_class">thread</prop>
 			</props>
 		</property>
 		<property name="annotatedClasses">
@@ -36,6 +37,7 @@
 				<value>edu.nju.aqi.model.AirQuality</value>
 				<value>edu.nju.aqi.model.MonitoringSites</value>
 				<value>edu.nju.aqi.model.Lnlt</value>
+				<value>edu.nju.aqi.model.Weather</value>
 			</list>
 		</property>
 	</bean>

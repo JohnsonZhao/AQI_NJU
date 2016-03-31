@@ -10,17 +10,21 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import edu.nju.aqi.analysis.impl.WeatherFactory;
 import edu.nju.aqi.meta.CityUtils;
 import edu.nju.aqi.meta.IndexTypeUtils;
 import edu.nju.aqi.model.AirQuality;
 import edu.nju.aqi.model.MonitoringSites;
+import edu.nju.aqi.model.Weather;
 import edu.nju.aqi.service.AirQualityService;
 import edu.nju.aqi.service.MonitoringSitesService;
+import edu.nju.aqi.service.WeatherService;
 
 public class SchedulerJob {
 
 	private AirQualityService airQualityService;
 	private MonitoringSitesService monitoringSitesService;
+	private WeatherService weatherService;
 
 	public AirQualityService getAirQualityService() {
 		return airQualityService;
@@ -39,6 +43,13 @@ public class SchedulerJob {
 		this.monitoringSitesService = monitoringSitesService;
 	}
 
+	public void setWeatherService(WeatherService weatherService) {
+		this.weatherService = weatherService;
+	}
+	
+	public WeatherService getWeatherService() {
+		return weatherService;
+	}
 	/*
 	 * public String getCity() { return city; } public void setCity(String city)
 	 * { this.city = city; }
@@ -47,9 +58,17 @@ public class SchedulerJob {
 	public void work() {
 		List<String> cities = CityUtils.getCities();
 		int i=1;
+		WeatherFactory factory = new WeatherFactory("bcf690ecb16b701393b8b0877dfe0806");
 		for(String city:cities){
 			crawlerCity(city);
+			weatherService.addWeather(factory.getCurrentWeather(city));
 			System.out.println("finish "+ (i++)+" cities!");
+			//延迟1.5s执行获取下个城市的数据，原因是天气API免费接口只允许60/m的访问
+			try {
+				Thread.sleep(1500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

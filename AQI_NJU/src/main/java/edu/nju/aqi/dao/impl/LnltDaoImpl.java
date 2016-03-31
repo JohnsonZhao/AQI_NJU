@@ -15,6 +15,7 @@ import java.util.List;
 public class LnltDaoImpl implements LnltDao{
     @Autowired
     private SessionFactory sessionFactory;
+    
 
     @Override
     public List<Lnlt> getAllLnlt() {

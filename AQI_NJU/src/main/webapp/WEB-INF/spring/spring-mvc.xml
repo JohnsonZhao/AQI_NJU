@@ -11,10 +11,14 @@
 
 	<!-- 注解扫描包 -->
 	<context:component-scan base-package="edu.nju.aqi" />
+	
 
 	<!-- 开启注解 -->
 	<mvc:annotation-driven />
-
+	
+	<!-- @Autowired进行bean注入 -->
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+	  
 	<!-- 静态资源(js/image)的访问 -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 

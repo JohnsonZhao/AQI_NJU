@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import edu.nju.aqi.analysis.helper.KeyProperty;
+
 @Entity
 @Table(name = "air_quality")
 public class AirQuality {
@@ -14,6 +16,7 @@ public class AirQuality {
     private String aqi;
     private String index_type;
     private String prim_pollu;
+    @KeyProperty
     private String pm25;
     private String pm10;
     private String co;
@@ -117,4 +120,11 @@ public class AirQuality {
     public void setDate(String date) {
         this.date = date;
     }
+
+	@Override
+	public String toString() {
+		return "AirQuality [id=" + id + ", city_name=" + city_name + ", date=" + date + ", aqi=" + aqi + ", index_type="
+				+ index_type + ", prim_pollu=" + prim_pollu + ", pm25=" + pm25 + ", pm10=" + pm10 + ", co=" + co
+				+ ", no2=" + no2 + ", o3=" + o3 + ", so2=" + so2 + "]";
+	}
 }

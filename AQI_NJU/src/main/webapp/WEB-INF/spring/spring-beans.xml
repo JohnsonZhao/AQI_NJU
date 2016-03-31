@@ -13,6 +13,10 @@
 	<bean id="MonitoringSitesDao" class="edu.nju.aqi.dao.impl.MonitoringSitesDaoImpl">
 	    <property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	
+	<bean id= "WeatherDao" class="edu.nju.aqi.dao.impl.WeatherDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 
 	
 	<bean id="AirQualityService" class="edu.nju.aqi.service.impl.AirQualityServiceImpl">
@@ -24,6 +28,30 @@
 	<bean id="MonitoringSitesService" class="edu.nju.aqi.service.impl.MonitoringSitesServiceImpl">
 		<property name="MonitoringSitesDao">
 			<ref bean="MonitoringSitesDao" />
+		</property>
+	</bean>
+	
+	<bean id="WeatherService" class="edu.nju.aqi.service.impl.WeatherServiceImpl">
+		<property name="WeatherDao">
+			<ref bean="WeatherDao" />
+		</property>
+	</bean>
+	
+	<bean id="AnalysisService" class="edu.nju.aqi.service.impl.AnalysisServiceImpl">
+		<property name="Prediction">
+			<ref bean="Prediction" />
+		</property>
+	</bean>
+	
+	<bean id="DataFactory" class="edu.nju.aqi.analysis.helper.DataFactory">
+		<property name="WeatherDao">
+			<ref bean="WeatherDao" />
+		</property>
+	</bean>
+	
+	<bean id="Prediction" class="edu.nju.aqi.analysis.impl.PredictionImpl">
+		<property name="DataFactory">
+			<ref bean="DataFactory" />
 		</property>
 	</bean>
 	
@@ -40,6 +68,10 @@
 	<bean name="MonitoringSitesManager" parent="transactionProxy">
 		<property name="target" ref="MonitoringSitesService"></property>
 	</bean>
+	
+	<bean name="WeatherManager" parent="transactionProxy">
+		<property name="target" ref="WeatherDao"></property>
+	</bean>
 
 	<!-- 要调用的工作类 -->
 	<bean id="SchedulerJob" class="edu.nju.aqi.quartz.SchedulerJob">
@@ -48,6 +80,9 @@
 		</property>
 		<property name="MonitoringSitesService">
 			<ref bean="MonitoringSitesService" />
+		</property>
+		<property name="WeatherService">
+			<ref bean="WeatherService" />
 		</property>
 	</bean>
 
