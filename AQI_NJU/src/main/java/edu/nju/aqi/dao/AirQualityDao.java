@@ -1,14 +1,16 @@
 package edu.nju.aqi.dao;
 
-import java.util.List;
-
 import edu.nju.aqi.model.AirQuality;
+
+import java.util.List;
 
 public interface AirQualityDao {
 
 	public List<AirQuality> getAllAirQuality();
 	
 	public boolean addAirQuality(AirQuality airQuality);
+
+	public boolean addAirQualityList(List<AirQuality> airQualityList);
 	
 	public List<AirQuality> getTodaysAirQuality(String city);
 	

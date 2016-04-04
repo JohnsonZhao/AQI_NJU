@@ -5,25 +5,34 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>AQI_NJU</display-name>
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.vm</welcome-file>
 	</welcome-file-list>
 
+	<!--<context-param>-->
+		<!--<param-name>log4jConfigLocation</param-name>-->
+		<!--<param-value>/WEB-INF/classes/log4j.web.properties</param-value>-->
+	<!--</context-param>-->
+
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/spring-*.xml</param-value>
+		<param-value>classpath*:spring/spring-*.xml</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
+   
 	<servlet>
 		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-		      /WEB-INF/spring/spring-mvc.xml
+		      classpath*:spring/spring-mvc.xml
 		  </param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -32,6 +41,11 @@
 		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/static/*</url-pattern>
+    </servlet-mapping>
 
 	<!-- 配置字符集 -->
 	<filter>

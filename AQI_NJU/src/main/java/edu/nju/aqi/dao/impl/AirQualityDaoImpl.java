@@ -64,6 +64,26 @@ public class AirQualityDaoImpl implements AirQualityDao {
         return true;
     }
 
+    @Override
+    public boolean addAirQualityList(List<AirQuality> airQualityList) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            for (AirQuality airQuality : airQualityList) {
+                session.saveOrUpdate(airQuality);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null)
+                transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return true;
+    }
+
 
     private Session getSession() throws HibernateException {
         Session sess = sessionFactory.getCurrentSession();
@@ -119,7 +139,7 @@ public class AirQualityDaoImpl implements AirQualityDao {
      where aq2.id is null
      */
     public List<AirQuality> getAllCurrentAirQuality() {
-        String sql = "select aq1.* from air_quality aq1 left join air_quality aq2 on (aq1.city_name = aq2.city_name and aq1.id < aq2.id ) where aq2.id is null ";
+        String sql = "SELECT * FROM air_quality where date = (select max(date) from sap.air_quality)";
         Session session = getSession();
         SQLQuery query = session.createSQLQuery(sql);
         query.addEntity(AirQuality.class);

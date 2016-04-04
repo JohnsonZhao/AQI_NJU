@@ -1,24 +1,22 @@
 package edu.nju.aqi.quartz;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
+import edu.nju.aqi.analysis.impl.WeatherFactory;
+import edu.nju.aqi.meta.CityUtils;
+import edu.nju.aqi.meta.IndexTypeUtils;
+import edu.nju.aqi.model.AirQuality;
+import edu.nju.aqi.model.MonitoringSites;
+import edu.nju.aqi.service.AirQualityService;
+import edu.nju.aqi.service.MonitoringSitesService;
+import edu.nju.aqi.service.WeatherService;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import edu.nju.aqi.analysis.impl.WeatherFactory;
-import edu.nju.aqi.meta.CityUtils;
-import edu.nju.aqi.meta.IndexTypeUtils;
-import edu.nju.aqi.model.AirQuality;
-import edu.nju.aqi.model.MonitoringSites;
-import edu.nju.aqi.model.Weather;
-import edu.nju.aqi.service.AirQualityService;
-import edu.nju.aqi.service.MonitoringSitesService;
-import edu.nju.aqi.service.WeatherService;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SchedulerJob {
 
@@ -46,7 +44,7 @@ public class SchedulerJob {
 	public void setWeatherService(WeatherService weatherService) {
 		this.weatherService = weatherService;
 	}
-	
+
 	public WeatherService getWeatherService() {
 		return weatherService;
 	}
@@ -73,6 +71,7 @@ public class SchedulerJob {
 	}
 
 	private boolean crawlerCity(String city) {
+		List<AirQuality> airQualityList = new ArrayList<>();
 		Document doc;
 		try {
 			doc = Jsoup.connect("http://www.pm25.in/" + city).get();

@@ -34,7 +34,7 @@ define(function (require, exports) {
                 feature.properties.level + '"><s></s></span></a></p><p class="leaflet_date">数据更新时间：' +
                 feature.properties.time + '</p></dt>';
 
-            popupContent += '<dd><p><span class="leaflet_info leaflet_info_border_level' + feature.properties.level + '">' + feature.properties.aqi + '</span><span>AQI指数</span></p><p><span class="leaflet_info leaflet_info_border_level' + feature.properties.level + '">' + feature.properties.levelName + '</span><span>空气质量级别</span></p><p><span class="leaflet_info leaflet_info_border_level' + feature.properties.level + '">' + feature.properties.order + '</span><span>全国排名</span></p><div class="clear"></div></dd></dl></div>';
+            popupContent += '<dd><p><span class="leaflet_info leaflet_info_border_level' + feature.properties.level + '">' + feature.properties.aqi + '</span><span>AQI指数</span></p><p><span class="leaflet_info leaflet_info_border_level' + feature.properties.level + ' leaflet_levelInfo">' + feature.properties.levelName + '</span><span>空气质量级别</span></p><p><span class="leaflet_info leaflet_info_border_level' + feature.properties.level + '">' + feature.properties.order + '</span><span>全国排名</span></p><div class="clear"></div></dd></dl></div>';
             marker.bindPopup(popupContent, {
                 closeButton: false,
                 minWidth: 320

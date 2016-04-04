@@ -23,11 +23,7 @@ public class AirQualityController {
         //request.setAttribute("airQualityList", airQualityService.getAllAirQuality());
         System.out.println(airQualityService.getAllAirQuality().get(0).getId());
         return "/login";
-
-
     }
-
-
 
     @RequestMapping("/getTodaysAirQuality")
     public String getTodaysAirQuality(String city, HttpServletRequest request) {
@@ -44,14 +40,12 @@ public class AirQualityController {
     }
 
     @RequestMapping("/getCurrentAirQuality")
-    public String getCurrentAirQuality(String city, HttpServletRequest request) {
-        request.setAttribute("airQuality", airQualityService.getCurrentAirQuality(city));
-        System.out.println(airQualityService.getCurrentAirQuality(city).getId());
-        return "/login";
+    public String getCurrentAirQuality(String city) {
+        return "/city";
     }
 
     @ResponseBody
-    @RequestMapping("getAllCurrentAirQuality")
+    @RequestMapping("/getAllCurrentAirQuality")
     public List<AirQualityBo> getAllCurrentAirQuality() {
         return airQualityService.getAllCurrentAirQuality();
     }

@@ -1,10 +1,10 @@
 package edu.nju.aqi.service;
 
-import java.util.List;
-
 import edu.nju.aqi.bo.AirQualityBo;
 import edu.nju.aqi.dao.AirQualityDao;
 import edu.nju.aqi.model.AirQuality;
+
+import java.util.List;
 
 public interface AirQualityService {
 
@@ -14,6 +14,8 @@ public interface AirQualityService {
 	public List<AirQuality> getAllAirQuality();
 	
 	public boolean addAirQuality(AirQuality airQuality);
+
+	public boolean addAirQualityList(List<AirQuality> airQualityList);
 	
 	public List<AirQuality> getTodaysAirQuality(String city);
 	
