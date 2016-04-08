@@ -24,4 +24,6 @@ public interface AirQualityService {
 	public AirQuality getCurrentAirQuality(String city);
 
 	List<AirQualityBo> getAllCurrentAirQuality();
+	
+	public List<AirQuality> get24HoursAirQuality(String city);
 }

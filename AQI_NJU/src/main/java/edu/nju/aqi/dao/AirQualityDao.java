@@ -14,6 +14,8 @@ public interface AirQualityDao {
 	
 	public List<AirQuality> getTodaysAirQuality(String city);
 	
+	public List<AirQuality> get24HoursAirQuality(String city);
+	
 	public List<AirQuality> getAllTodaysAirQuality();
 	
 	public AirQuality getCurrentAirQuality(String city);

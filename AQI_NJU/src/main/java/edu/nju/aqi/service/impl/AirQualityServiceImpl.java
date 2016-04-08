@@ -98,5 +98,10 @@ public class AirQualityServiceImpl implements AirQualityService {
         return resultList;
     }
 
+	@Override
+	public List<AirQuality> get24HoursAirQuality(String city) {
+		return airQualityDao.get24HoursAirQuality(city);
+	}
+
 
 }
