@@ -6,7 +6,12 @@ import java.util.Date;
 public class DateUtils {
 	
 	public static final String FORMAT_DEFAULT = "yyyy_MM_dd_HH";
+	public static final String FORMAT_DAY = "yyyy_MM_dd";
 
+	public static String getDayStr(){
+		return getDateStr(FORMAT_DAY);
+	}
+	
 	public static String getDateStr(){
 		return getDateStr(FORMAT_DEFAULT);
 	}
