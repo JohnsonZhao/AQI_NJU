@@ -1,11 +1,15 @@
 package edu.nju.aqi.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import edu.nju.aqi.model.MonitoringSites;
 import edu.nju.aqi.service.MonitoringSitesService;
 
 @Controller
@@ -15,11 +19,12 @@ public class MonitoringSitesController {
 	@Resource(name="MonitoringSitesManager")
 	private MonitoringSitesService monitoringSitesService;
 	
+	@ResponseBody
 	@RequestMapping("/getCurrentMonitoringSites")
-	public String getCurrentMonitoringSites(String city,HttpServletRequest request){
+	public List<MonitoringSites> getCurrentMonitoringSites(String city,HttpServletRequest request){
 		request.setAttribute("monitoringSites", monitoringSitesService.getCurrentMonitoringSites(city));
-		System.out.println(monitoringSitesService.getCurrentMonitoringSites(city).size());
-		return "/login";
+		//System.out.println(monitoringSitesService.getCurrentMonitoringSites(city).size());
+		return monitoringSitesService.getCurrentMonitoringSites(city);
 	}
 	
 }
