@@ -141,3 +141,7 @@ nav {
     border: #7E0023 solid 2px;
     color: #7E0023;
 }
+
+.leaflet_info_border_level3.leaflet_levelInfo, .leaflet_info_border_level4.leaflet_levelInfo, .leaflet_info_border_level5.leaflet_levelInfo, .leaflet_info_border_level6.leaflet_levelInfo {
+    font-size: 12px;
+}

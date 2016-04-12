@@ -1,7 +1,12 @@
 <nav role="navigation" style="background-color: rgba(17, 17, 17, 0.45)">
     <div class="nav-wrapper container">
-        <a id="logo-container" href="#" class="brand-logo">AirNow</a>
+        <a id="logo-container" href="${request.getContextPath()}" class="brand-logo">AirNow</a>
         <ul class="right hide-on-med-and-down">
+            <li>
+                <a href="#">
+                    预测分析
+                </a>
+            </li>
             <li>
                 <div id="search" style="display: none;">
                     <form action="/present/getSpecificCity" method="get">

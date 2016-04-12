@@ -4,17 +4,13 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 //import org.hibernate.cfg.Configuration;
 
-
-
-
-
 import edu.nju.aqi.dao.MonitoringSitesDao;
-import edu.nju.aqi.meta.DateUtils;
 import edu.nju.aqi.model.AirQuality;
 import edu.nju.aqi.model.MonitoringSites;
 
@@ -93,25 +89,37 @@ public class MonitoringSitesDaoImpl implements MonitoringSitesDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<MonitoringSites> getCurrentMonitoringSites(String city) {
-		//get corresponding id
-		String dateStr = DateUtils.getDateStr();
-		String hql = "from AirQuality as aq where aq.id like '"+city+"_"+dateStr+"_"+"%' order by aq.id desc";
+		// get corresponding id
+		String hql = "FROM AirQuality as aq where aq.date = (select max(date) from AirQuality) and aq.id like '"
+				+ city + "%'";
 		Session session = getSession();
 		Query query = session.createQuery(hql);
 		List<AirQuality> list = query.list();
-		String id = list.get(0).getId();
-		String hql2 = "from MonitoringSites as ms where ms.id like '"+id+"_"+"%'";
-		Query query2 = session.createQuery(hql2);
-		List<MonitoringSites> list2 = query2.list();
-		return list2;
+		/*
+		 * String dateStr = DateUtils.getDateStr(); String hql =
+		 * "from AirQuality as aq where aq.id like '"
+		 * +city+"_"+dateStr+"_"+"%' order by aq.id desc"; Session session =
+		 * getSession(); Query query = session.createQuery(hql);
+		 * List<AirQuality> list = query.list();
+		 */
+		if (list.size() > 0) {
+			AirQuality aq = (AirQuality)list.get(0);
+			String id = aq.getId();
+			String hql2 = "from MonitoringSites as ms where ms.id like '" + id
+					+ "_" + "%'";
+			Query query2 = session.createQuery(hql2);
+			List<MonitoringSites> list2 = query2.list();
+			return list2;
+		}
+		return null;
 	}
 
-	private Session getSession() throws HibernateException { 
-		Session sess = sessionFactory.getCurrentSession(); 
-		if (sess == null) { 
-			sess = sessionFactory.openSession(); 
-		} 
-		return sess; 
+	private Session getSession() throws HibernateException {
+		Session sess = sessionFactory.getCurrentSession();
+		if (sess == null) {
+			sess = sessionFactory.openSession();
+		}
+		return sess;
 	}
 
 }

@@ -13,15 +13,21 @@ public class AirQuality {
     private String id;
     private String city_name;
     private String date;
+    @KeyProperty
     private String aqi;
     private String index_type;
     private String prim_pollu;
     @KeyProperty
     private String pm25;
+    @KeyProperty
     private String pm10;
+    @KeyProperty
     private String co;
+    @KeyProperty
     private String no2;
+    @KeyProperty
     private String o3;
+    @KeyProperty
     private String so2;
 
     @Id

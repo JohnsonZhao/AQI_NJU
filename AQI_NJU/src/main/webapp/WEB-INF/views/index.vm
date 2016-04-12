@@ -13,14 +13,14 @@
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="resources/dep/materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="resources/dep/materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="static/dep/materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="static/dep/materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet'/>
-    <link href='resources/css/index.css' rel='stylesheet'/>
+    <link href='static/css/index.css' rel='stylesheet'/>
 </header>
 <body>
 <div id="loading">
-    <img src="resources/images/loading.jpg" align="middle"/>
+    <img src="static/images/loading.jpg" align="middle"/>
 </div>
 
 #parse("/common/nav.vm")
@@ -31,10 +31,10 @@
 </div>
 
 
-<script type="text/javascript" src="resources/dep/jquery/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="resources/dep/materialize/js/materialize.js"></script>
-<script type="text/javascript" src="resources/js/sea.js"></script>
-<script type="text/javascript" src="resources/js/sea-modules/conf/common.js"></script>
+<script type="text/javascript" src="static/dep/jquery/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="static/dep/materialize/js/materialize.js"></script>
+<script type="text/javascript" src="static/js/sea.js"></script>
+<script type="text/javascript" src="static/js/sea-modules/conf/common.js"></script>
 <script>
     seajs.use(['map','nav'], function (map, nav) {
         map.init();

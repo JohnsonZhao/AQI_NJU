@@ -17,21 +17,33 @@ import edu.nju.aqi.service.WeatherService;
 public class WeatherController {
 	@Autowired
 	private WeatherService weatherService;
-	@Autowired 
+	@Autowired
 	private AnalysisService analysisService;
-	
+
 	@RequestMapping("/getCurrentWeather")
-	public String getCurrentMonitoringSites(String city,HttpServletRequest request){
+	public String getCurrentMonitoringSites(String city, HttpServletRequest request) {
 		request.setAttribute("weather", weatherService.getCurrentWeather("abazhou"));
 		return "/login";
 	}
-	
+
 	@RequestMapping("/forecast")
-	public String getForcast(String cityName, HttpServletRequest request){
+	public String getForcast(String cityName, HttpServletRequest request) {
 		List<AirQuality> airQualities = analysisService.predict("abazhou");
-		for(AirQuality airQuality: airQualities){
-			System.out.println(airQuality.toString());
+		if (airQualities != null) {
+
+			for (AirQuality airQuality : airQualities) {
+				System.out.println(airQuality.toString());
+			}
 		}
+		return "/login";
+	}
+	
+	@RequestMapping("/correlation")
+	public String getCorrelation(String cityName1, String cityName2, HttpServletRequest request){
+		String name1 = "baoji";
+		String name2 = "baoji";
+		String result = analysisService.getCorrelation(name1, name2);
+		System.out.println(result);
 		return "/login";
 	}
 }

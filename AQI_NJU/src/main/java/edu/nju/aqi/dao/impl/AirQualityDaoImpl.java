@@ -3,6 +3,7 @@ package edu.nju.aqi.dao.impl;
 import edu.nju.aqi.dao.AirQualityDao;
 import edu.nju.aqi.meta.DateUtils;
 import edu.nju.aqi.model.AirQuality;
+
 import org.hibernate.*;
 
 import java.util.List;
@@ -64,6 +65,26 @@ public class AirQualityDaoImpl implements AirQualityDao {
         return true;
     }
 
+    @Override
+    public boolean addAirQualityList(List<AirQuality> airQualityList) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            for (AirQuality airQuality : airQualityList) {
+                session.saveOrUpdate(airQuality);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null)
+                transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return true;
+    }
+
 
     private Session getSession() throws HibernateException {
         Session sess = sessionFactory.getCurrentSession();
@@ -75,7 +96,8 @@ public class AirQualityDaoImpl implements AirQualityDao {
 
     @Override
     public List<AirQuality> getTodaysAirQuality(String city) {
-        String dateStr = DateUtils.getDateStr();
+        String dateStr = DateUtils.getDayStr();
+        //System.out.println(dateStr);
         String hql = "from AirQuality as aq where aq.id like '" + city + "_" + dateStr + "_" + "%'";
         Session session = getSession();
         Query query = session.createQuery(hql);
@@ -87,7 +109,7 @@ public class AirQualityDaoImpl implements AirQualityDao {
 
     @Override
     public List<AirQuality> getAllTodaysAirQuality() {
-        String dateStr = DateUtils.getDateStr();
+        String dateStr = DateUtils.getDayStr();
         String hql = "from AirQuality as aq where aq.id like '" + "%_" + dateStr + "_" + "%' order by aq.id desc";
         Session session = getSession();
         Query query = session.createQuery(hql);
@@ -99,15 +121,17 @@ public class AirQualityDaoImpl implements AirQualityDao {
 
     @Override
     public AirQuality getCurrentAirQuality(String city) {
-        String dateStr = DateUtils.getDateStr();
-//		AirQuality result = (AirQuality) getSession().createCriteria(AirQuality.class).addOrder(Order.desc("id")).add(Restrictions.like("id", "'"+city+"_"+dateStr+"_"+"%'")).setMaxResults(1).uniqueResult();
-        String hql = "from AirQuality as aq where aq.id like '" + city + "_" + dateStr + "_" + "%' order by aq.id desc";
-        Session session = getSession();
-        Query query = session.createQuery(hql);
-        @SuppressWarnings("unchecked")
-        List<AirQuality> list = query.list();
-        //session.close();
-        return list.get(0);
+        //String dateStr = DateUtils.getDateStr();
+		//AirQuality result = (AirQuality) getSession().createCriteria(AirQuality.class).addOrder(Order.desc("id")).add(Restrictions.like("id", "'"+city+"_"+dateStr+"_"+"%'")).setMaxResults(1).uniqueResult();
+        //String hql = "from AirQuality as aq where aq.id like '" + city + "_" + dateStr + "_" + "%' order by aq.id desc";
+    	String hql = "FROM AirQuality as aq where aq.date = (select max(date) from AirQuality) and aq.id like '"
+				+ city + "%'";
+		Session session = getSession();
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<AirQuality> list = query.list();
+        //System.out.println(list.get(0).toString());
+        return (AirQuality)list.get(0);
     }
 
     @Override
@@ -119,12 +143,25 @@ public class AirQualityDaoImpl implements AirQualityDao {
      where aq2.id is null
      */
     public List<AirQuality> getAllCurrentAirQuality() {
-        String sql = "select aq1.* from air_quality aq1 left join air_quality aq2 on (aq1.city_name = aq2.city_name and aq1.id < aq2.id ) where aq2.id is null ";
+        String sql = "SELECT * FROM air_quality where date = (select max(date) from sap.air_quality)";
         Session session = getSession();
         SQLQuery query = session.createSQLQuery(sql);
         query.addEntity(AirQuality.class);
-        List<AirQuality> list = query.list();
+        @SuppressWarnings("unchecked")
+		List<AirQuality> list = query.list();
         System.out.println(list);
         return list;
     }
+
+	@Override
+	public List<AirQuality> get24HoursAirQuality(String city) {
+		String sql = "SELECT * FROM air_quality WHERE date > DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 DAY),'%Y_%m_%d_%H') and id LIKE '"+city+"%';";
+		Session session = getSession();
+        SQLQuery query = session.createSQLQuery(sql);
+        query.addEntity(AirQuality.class);
+        @SuppressWarnings("unchecked")
+		List<AirQuality> list = query.list();
+        System.out.println(list);
+        return list;
+	}
 }

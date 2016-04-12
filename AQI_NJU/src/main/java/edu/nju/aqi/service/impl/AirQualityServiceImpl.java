@@ -1,8 +1,5 @@
 package edu.nju.aqi.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import edu.nju.aqi.bo.AirQualityBo;
 import edu.nju.aqi.dao.AirQualityDao;
 import edu.nju.aqi.dao.LnltDao;
@@ -11,6 +8,11 @@ import edu.nju.aqi.model.Lnlt;
 import edu.nju.aqi.service.AirQualityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class AirQualityServiceImpl implements AirQualityService {
@@ -43,6 +45,11 @@ public class AirQualityServiceImpl implements AirQualityService {
     }
 
     @Override
+    public boolean addAirQualityList(List<AirQuality> airQualityList) {
+        return airQualityDao.addAirQualityList(airQualityList);
+    }
+
+    @Override
     public List<AirQuality> getTodaysAirQuality(String city) {
         return airQualityDao.getTodaysAirQuality(city);
     }
@@ -63,23 +70,38 @@ public class AirQualityServiceImpl implements AirQualityService {
         List<AirQuality> airQualityList = airQualityDao.getAllCurrentAirQuality();
         List<Lnlt> lnltList = lnltDao.getAllLnlt();
 
+        Map<String, String> nameToCoordinateMap = new HashMap<>();
+        for (Lnlt lnlt : lnltList) {
+            String cityName = lnlt.getCityName();
+            String coordinate = "[" + lnlt.getLongitude() + "," + lnlt.getLatitude() + "]";
+            nameToCoordinateMap.put(cityName, coordinate);
+
+        }
+
         for (AirQuality airQuality : airQualityList) {
             String cityName = airQuality.getCity_name();
-            for (Lnlt lnlt : lnltList) {
-                if (lnlt.getCityName().equals(cityName)) {
-                    AirQualityBo bo = new AirQualityBo();
-                    bo.setId(airQuality.getId());
-                    bo.setAqi(airQuality.getAqi());
-                    bo.setCityName(airQuality.getCity_name());
-                    bo.setDate(airQuality.getDate());
-                    bo.setCo(airQuality.getCo());
-                    bo.setIndexType(airQuality.getIndex_type());
-                    bo.setPrimPollu(airQuality.getPrim_pollu());
-                    bo.setCoordinates("[" + lnlt.getLongitude() + "," + lnlt.getLatitude() + "]");
-                    resultList.add(bo);
-                }
+            if (nameToCoordinateMap.keySet().contains(cityName)) {
+                AirQualityBo bo = new AirQualityBo();
+                bo.setId(airQuality.getId());
+                bo.setAqi(airQuality.getAqi());
+                bo.setCityName(airQuality.getCity_name());
+                bo.setDate(airQuality.getDate());
+                bo.setCo(airQuality.getCo());
+                bo.setNo2(airQuality.getNo2());
+                bo.setO3(airQuality.getO3());
+                bo.setIndexType(airQuality.getIndex_type());
+                bo.setPrimPollu(airQuality.getPrim_pollu());
+                bo.setCoordinates(nameToCoordinateMap.get(airQuality.getCity_name()));
+                resultList.add(bo);
             }
         }
         return resultList;
     }
+
+	@Override
+	public List<AirQuality> get24HoursAirQuality(String city) {
+		return airQualityDao.get24HoursAirQuality(city);
+	}
+
+
 }

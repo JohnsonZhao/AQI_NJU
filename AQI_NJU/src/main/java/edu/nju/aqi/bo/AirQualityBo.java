@@ -1,13 +1,8 @@
 package edu.nju.aqi.bo;
 
-import org.springframework.stereotype.Component;
-
-import java.util.Date;
-
 /**
  * Created by lulei on 16/3/17.
  */
-@Component
 public class AirQualityBo {
     private String id;
     // 城市坐标
@@ -144,4 +139,5 @@ public class AirQualityBo {
     public void setSo2(String so2) {
         this.so2 = so2;
     }
+
 }
