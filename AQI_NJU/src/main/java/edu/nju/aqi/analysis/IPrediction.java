@@ -15,7 +15,7 @@ public interface IPrediction {
 	/**
 	 * 模型生成
 	 */
-    public void doTrain();
+    public void doTrain(String cityName);
 
     /**
      * 获取预测结果

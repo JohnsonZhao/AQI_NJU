@@ -10,6 +10,7 @@ import org.neuroph.core.learning.TrainingElement;
 import org.neuroph.core.learning.TrainingSet;
 
 import edu.nju.aqi.analysis.impl.WeatherFactory;
+import edu.nju.aqi.dao.AirQualityDao;
 import edu.nju.aqi.dao.WeatherDao;
 import edu.nju.aqi.model.AirQuality;
 import edu.nju.aqi.model.Weather;
@@ -22,6 +23,16 @@ public class DataFactory {
 	private String[] outputDataNames;
 
 	private WeatherDao weatherDao;
+	
+	private AirQualityDao airQualityDao;
+	
+	public void setAirQualityDao(AirQualityDao airQualityDao){
+		this.airQualityDao = airQualityDao;
+	}
+	
+	public AirQualityDao getAirQualityDao(){
+		return this.airQualityDao;
+	}
 
 	public void setWeatherDao(WeatherDao weatherDao) {
 		this.weatherDao = weatherDao;
@@ -60,6 +71,10 @@ public class DataFactory {
 
 	public String[] getOutputPropertyNames() {
 		return outputDataNames;
+	}
+	
+	public double[] getHistoryAqis(String cityName){
+		return new double[]{};
 	}
 
 	private String[] getPropertyNames(Class<?> clazz) {

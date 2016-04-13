@@ -23,7 +23,6 @@ import edu.nju.aqi.analysis.helper.DataFactory;
  */
 public class LineRegressionPredict implements IPrediction {
 	private boolean isTrained;
-	private double error;
 	/* 训练数据集 */
 	private double[][] trainingData;
 	/* 训练数据的组数 */
@@ -57,7 +56,7 @@ public class LineRegressionPredict implements IPrediction {
 	@Override
 	public List<Map<String, Double>> execute(String cityName) {
 		this.cityName = cityName;
-		doTrain();
+		doTrain(cityName);
 		while (isTrained) {
 			return doPredict(cityName);
 		}
@@ -65,7 +64,7 @@ public class LineRegressionPredict implements IPrediction {
 	}
 
 	@Override
-	public void doTrain() {
+	public void doTrain(String cityName) {
 		initTrainingData();
 		initTheta();
 		for(int i = 0 ; i< row; i++){
@@ -117,7 +116,6 @@ public class LineRegressionPredict implements IPrediction {
 
 	@Override
 	public void setError(double error) {
-		this.error = error;
 	}
 
 	/**
