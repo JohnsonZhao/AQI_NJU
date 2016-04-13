@@ -49,12 +49,9 @@
 		<property name="WeatherDao">
 			<ref bean="WeatherDao" />
 		</property>
-		<property name="AirQualityDao">
-			<ref bean="AirQualityDao" />
-		</property>
 	</bean>
 
-	<bean id="Prediction" class="edu.nju.aqi.analysis.impl.NeurophyPredictionImpl">
+	<bean id="Prediction" class="edu.nju.aqi.analysis.impl.PredictionImpl">
 		<property name="DataFactory">
 			<ref bean="DataFactory" />
 		</property>
@@ -109,7 +106,7 @@
 			<ref bean="jobtask" />
 		</property>
 		<property name="cronExpression">
-			<value>0 0 0/1 * * ?</value><!-- <value>0 15/1 20 * * ?</value> -->
+			<value>0 50 * * * ?</value><!-- <value>0 15/1 20 * * ?</value> -->
 		</property>
 	</bean>
 	<bean id="startQuertz" lazy-init="false" autowire="no"

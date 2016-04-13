@@ -22,14 +22,213 @@
 
 <body>
     #parse("common/nav.vm")
+<div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+        <div class="container">
+            <br>
+            <br>
+            <h1 class="header center valign">${airQuality.city_name}</h1>
+        </div>
+    </div>
+    <div class="parallax">
+        <img src="../static/images/background3.jpg" style="display: block; transform: translate3d(-50%, 151px, 0px);">
+    </div>
+</div>
+
+<div class="container">
+    <div class="section" style="text-align: center">
+        <h2 class="header brown-text lighten-1 section-title">
+            <span>
+                <i class="mdi-image-wb-cloudy"></i>
+                空气详情
+            </span>
+        </h2>
+        <div class="row">
+            <div class="col s12 m3">
+                <div class="card teal accent-4">
+                    <div class="card-content white-text">
+                        <span class="card-title">$!{airQuality.aqi}</span>
+                        <p>AQI</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="card teal accent-4">
+                    <div class="card-content white-text">
+                        <span class="card-title">$!{airQuality.pm25}</span>
+                        <p>PM2.5</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="card teal accent-4">
+                    <div class="card-content white-text">
+                        <span class="card-title">$!{airQuality.pm10}</span>
+                        <p>PM10</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="card teal accent-4">
+                    <div class="card-content white-text">
+                        <span class="card-title">$!{airQuality.co}</span>
+                        <p>CO</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="card teal accent-4">
+                    <div class="card-content white-text">
+                        <span class="card-title">$!{airQuality.no2}</span>
+                        <p>NO<sub>2</sub></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="card teal accent-4">
+                    <div class="card-content white-text">
+                        <span class="card-title">$!{airQuality.o3}</span>
+                        <p>O<sub>3</sub>/h</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="card teal accent-4">
+                    <div class="card-content white-text">
+                        <span class="card-title">$!{airQuality.so2}</span>
+                        <p>SO<sub>2</sub>/h</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="card teal accent-4">
+                    <a href="#monitorsites" class="modal-trigger">
+                        <div class="card-content white-text">
+                            <i class="material-icons" style="font-size: 40px;">add_circle_outline</i>
+                            <p>监测点详情</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="parallax-container">
+    <div class="section no-pad-bot">
+        <div class="container">
+            <div id="chartdiv1" style=" height: 400px; "></div>
+        </div>
+    </div>
+    <div class="parallax"><img src="../static/images/chartbg.jpg" alt="Unsplashed background img 3"
+                               style="display: block; transform: translate3d(-80%, 182px, 0px);"></div>
+</div>
+
+<div class="container">
+    <div class="section">
+        <h2 class="header brown-text lighten-1 section-title">
+            <span>
+                <i class="mdi-action-book"></i>
+                今日生活指南
+            </span>
+        </h2>
+        <div class="row">
+        </div>
+    </div>
+</div>
+
+<footer class="page-footer teal lighten-2">
+    <div class="container">
+        <div class="row">
+            <div class="col l9 s12">
+                <h5 class="white-text">Company Bio</h5>
+                <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's
+                    our full time job. Any amount would help support and continue development on this project and is
+                    greatly appreciated.</p>
+
+
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Connect</h5>
+                <ul>
+                    <li><a class="white-text" href="#!">Link 1</a></li>
+                    <li><a class="white-text" href="#!">Link 2</a></li>
+                    <li><a class="white-text" href="#!">Link 3</a></li>
+                    <li><a class="white-text" href="#!">Link 4</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Modal Structure -->
+<div id="monitorsites" class="modal">
+    <div class="modal-content">
+        <h4>监测点详情</h4>
+        <table id="monitor-table" class="striped centered">
+            <thead>
+            <tr>
+                <th data-field="name">监测点</th>
+                <th data-field="aqi">AQI</th>
+                <th data-field="type">污染级别</th>
+                <th data-field="prim">首要污染物</th>
+                <th data-field="pm25">PM2.5</th>
+                <th data-field="pm10">PM10</th>
+                <th data-field="co">CO</th>
+                <th data-field="no2">NO2</th>
+                <th data-field="o3">O3</th>
+                <th data-field="so2">SO2</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <script type="text/javascript" src="../static/dep/jquery/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="../static/dep/materialize/js/materialize.js"></script>
+<script type="text/javascript" src="../static/dep/amcharts/amcharts.js"></script>
+<script type="text/javascript" src="../static/dep/amcharts/serial.js"></script>
+<script type="text/javascript" src="../static/dep/amcharts/themes/light.js"></script>
+<script type="text/javascript" src="../static/dep/amcharts/themes/chalk.js"></script>
 <script type="text/javascript" src="../static/js/sea.js"></script>
-<script type="text/javascript" src="../static/js/sea-modules/conf/common.js"></script>
+<script type="text/javascript" src="../static/js/common.js"></script>
 <script>
-    seajs.use('nav', function (nav) {
+    seajs.use(['nav', 'chart'], function (nav, chart) {
+        var id = '${airQuality.id}';
         nav.toggleSearch();
+        chart.makechart('chartdiv1', '${airQuality.id}');
+        $('.parallax').parallax();
+        $('.modal-trigger').leanModal({
+            dismissible: true,
+            ready: function () {
+                $.getJSON('${request.getContextPath()}/MonitoringSites/getCurrentMonitoringSites', {city: id.split('_')[0]}, function (data) {
+                    data.forEach(function (sitedata) {
+                        var row = $('<tr>');
+                        var tharr = ['name','aqi','index_type','prim_pollu','pm25','pm10','co','no2','o3','so2'];
+                        for (var key of tharr) {
+                            console.log(key);
+                            var x = sitedata[key];
+                            row.append($('<td>'+x+'</td>'));
+                        }
+                        $('#monitor-table tbody').append(row);
+                    });
+                })
+            },
+            complete: function() {
+                $('tbody').empty();
+            }
+        });
+
+
     })
 </script>
 </body>

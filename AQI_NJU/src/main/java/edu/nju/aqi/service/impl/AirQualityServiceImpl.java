@@ -89,6 +89,7 @@ public class AirQualityServiceImpl implements AirQualityService {
                 bo.setCo(airQuality.getCo());
                 bo.setNo2(airQuality.getNo2());
                 bo.setO3(airQuality.getO3());
+                bo.setPm25(airQuality.getPm25());
                 bo.setIndexType(airQuality.getIndex_type());
                 bo.setPrimPollu(airQuality.getPrim_pollu());
                 bo.setCoordinates(nameToCoordinateMap.get(airQuality.getCity_name()));

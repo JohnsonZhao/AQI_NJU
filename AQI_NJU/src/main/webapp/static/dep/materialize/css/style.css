@@ -6,51 +6,112 @@
  * Made By MaterializeCSS.com
  */
 
-
-
 p {
-  line-height: 2rem;
+    line-height: 2rem;
 }
 
 .button-collapse {
-  color: #26a69a;
+    color: #26a69a;
 }
 
 .parallax-container {
-  min-height: 380px;
-  line-height: 0;
-  height: auto;
-  color: rgba(255,255,255,.9);
+    min-height: 380px;
+    height: auto;
+    color: rgba(255, 255, 255, .9);
 }
 
-
-  .parallax-container .section {
+.parallax-container .section {
     width: 100%;
-  }
-
-@media only screen and (max-width : 992px) {
-  .parallax-container .section {
-    position: absolute;
-    top: 40%;
-  }
-  #index-banner .section {
-    top: 10%;
-  }
 }
 
-@media only screen and (max-width : 600px) {
-  #index-banner .section {
-    top: 0;
-  }
+@media only screen and (max-width: 992px) {
+    .parallax-container .section {
+        position: absolute;
+        top: 40%;
+    }
+
+    #index-banner .section {
+        top: 10%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #index-banner .section {
+        top: 0;
+    }
 }
 
 .icon-block {
-  padding: 0 15px;
+    padding: 0 15px;
 }
+
 .icon-block .material-icons {
-  font-size: inherit;
+    font-size: inherit;
 }
 
 footer.page-footer {
-  margin: 0;
+    margin: 0;
+}
+
+.section-title {
+    position: relative;
+    margin-bottom: 1em;
+    font-size: 22px;
+    font-weight: 400;
+    text-align: left;
+}
+
+.section-title:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    border-bottom: 4px solid #dddddd;
+}
+
+.section-title i {
+    padding: 6px;
+    border-radius: 50%;
+    border: 4px solid #dddddd;
+    color: #dddddd;
+    margin-right: 16px;
+    font-size: 24px;
+}
+
+.section-title span {
+    position: relative;
+    display: inline-block;
+    padding-right: 1.4em;
+    background: #fff;
+}
+
+.card .card-title {
+    font-weight: bold;
+    font-size: 50px;
+}
+
+
+#header #header-bottom {
+    height: 65px;
+    background-color: #e3e9f8;
+    border-bottom: 1px solid #cdd9f3;
+    position: relative;
+}
+
+#rank-row {
+    background-color: #EDEDED;
+    padding: 20px;
+}
+
+.tabs {
+    background-color: transparent;
+}
+.tabs .indicator {
+    background-color: rgb(29,181,171);
+}
+
+.tabs .tab a{
+    color: #999;
+    font-weight: bold;
 }

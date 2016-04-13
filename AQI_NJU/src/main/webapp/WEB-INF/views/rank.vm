@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<header>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>全国排名</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../static/dep/materialize/css/materialize.css" type="text/css" rel="stylesheet"
+          media="screen,projection"/>
+    <link href="../static/dep/materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="../static/dep/dynatable/dynatable.css" type="text/css" rel="stylesheet"/>
+    <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet'/>
+    <link href='../static/css/index.css' rel='stylesheet'/>
+</header>
+
+<body>
+<nav role="navigation" style="position: relative;background-color: #1db5ab;">
+    <div class="nav-wrapper container">
+        <a id="logo-container" href="${request.getContextPath()}" class="brand-logo">AirNow</a>
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <a href="${request.getContextPath()}/analyze">
+                    <i class="icon-up-arrow-1 tooltipped" data-position="bottom" data-tooltip="预测分析" data-delay="30"
+                       style="padding-top: 10%;"></i>
+                </a>
+            </li>
+            <li>
+                <div id="search" style="display: none;">
+                    <form action="/present/getSpecificCity" method="get">
+                        <input placeholder="Search City" id="city-name" class="form-control" type="text"
+                               name="cityName">
+                    </form>
+                </div>
+            </li>
+            <li>
+                <a href="#!" id="toggle-search">
+                    <i class="large mdi-action-search">
+                    </i>
+                </a>
+            </li>
+            <li>
+                <a href="${request.getContextPath()}/AirQuality/rank?sorts[order]=1">
+                    <i class="large material-icons tooltipped" data-delay="5" data-tooltip="全国排行">insert_chart</i>
+                </a>
+            </li>
+            <li>
+                <a href="${request.getContextPath()}/static/html/about.html">
+                    <i class="large material-icons">face</i>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+<div id="rank-row" class="row">
+    <div class="container">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="col s3 tab"><a class="active" href="#current">实时排行</a></li>
+                <li class="col s3 tab"><a href="#yesterday">昨日排行</a></li>
+                <li class="col s3 tab"><a href="#sevendays">7天排行</a></li>
+                <li class="col s3 tab"><a href="#thirtydays">30天排行</a></li>
+            </ul>
+        </div>
+        <div id="current">
+            <table id="current-table">
+                <thead>
+                <tr>
+                    <th data-dynatable-column="order" >排名</th>
+                    <th data-dynatable-column="cityName">城市</th>
+                    <th data-dynatable-column="indexType">污染等级</th>
+                    <th data-dynatable-column="aqi">AQI</th>
+                    <th data-dynatable-column="pm25">PM2.5浓度</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                </tbody>
+            </table>
+
+        </div>
+        <div id="yesterday">yesterday</div>
+        <div id="sevendays">sevendays</div>
+        <div id="thirtydays">thirtydays</div>
+    </div>
+
+</div>
+</body>
+
+<script type="text/javascript" src="../static/dep/jquery/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../static/dep/materialize/js/materialize.js"></script>
+<script type="text/javascript" src="../static/js/sea.js"></script>
+<script type="text/javascript" src="../static/js/common.js"></script>
+
+<script>
+    seajs.use(['nav','rank'], function (nav, rank) {
+        nav.toggleSearch();
+        rank.current_rank('${request.getContextPath()}/AirQuality/getAllCurrentAirQuality');
+    })
+</script>
