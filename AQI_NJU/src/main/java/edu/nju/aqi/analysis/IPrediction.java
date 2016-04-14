@@ -6,21 +6,22 @@ import java.util.Map;
 public interface IPrediction {
 	
 	/**
-	 * 
-	 * @param trainingData 训练数据
-	 * @param realData 真实数据输入
+	 * 模型生成+获取预测结果
+	 * @param cityName
+	 * @return
 	 */
 	public List<Map<String, Double>> execute(String cityName);
 
 	/**
-	 * 
-	 * @param trainingData 训练数据
+	 * 模型生成
 	 */
-    public void doTrain();
+    public void doTrain(String cityName);
 
     /**
-     * 输入真实数据，使用模型进行求解预测
+     * 获取预测结果
+     * Note：前置条件是模型已经生成（已用历史数据训练过）
      * @param cityName
+     * @return
      */
     public List<Map<String, Double>> doPredict(String cityName);
 
@@ -30,5 +31,4 @@ public interface IPrediction {
      */
     public void setError(double error);
 
-    public void setLayer(int layer);
 }

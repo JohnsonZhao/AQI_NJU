@@ -3,14 +3,14 @@
         <a id="logo-container" href="${request.getContextPath()}" class="brand-logo">AirNow</a>
         <ul class="right hide-on-med-and-down">
             <li>
-                <a href="#">
-                    预测分析
+                <a  href="${request.getContextPath()}/analyze">
+                    <i class="icon-up-arrow-1 tooltipped" data-position="bottom" data-tooltip="预测分析" data-delay="30" style="padding-top: 10%;"></i>
                 </a>
             </li>
             <li>
                 <div id="search" style="display: none;">
-                    <form action="/present/getSpecificCity" method="get">
-                        <input placeholder="Search City" id="city-name" class="form-control" type="text" name="cityName">
+                    <form action="${request.getContextPath()}/AirQuality/getCurrentAirQuality" method="get">
+                        <input placeholder="Search City" id="city-name" class="form-control" type="text" name="city">
                     </form>
                 </div>
             </li>
@@ -18,6 +18,16 @@
                 <a href="#!" id="toggle-search" >
                     <i class="large mdi-action-search">
                     </i>
+                </a>
+            </li>
+            <li>
+                <a href="${request.getContextPath()}/AirQuality/rank?sorts[order]=1">
+                    <i class="large material-icons tooltipped"  data-delay="5" data-tooltip="全国排行">insert_chart</i>
+                </a>
+            </li>
+            <li>
+                <a href="${request.getContextPath()}/static/html/about.html">
+                    <i class="large material-icons">face</i>
                 </a>
             </li>
         </ul>

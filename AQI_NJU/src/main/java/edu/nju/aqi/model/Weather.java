@@ -29,7 +29,6 @@ public class Weather implements Serializable {
 	private String humidity;
 	@KeyProperty
 	private String windSpeed;
-	@KeyProperty
 	private String clouds;
 	private String rain;
 	private String type;

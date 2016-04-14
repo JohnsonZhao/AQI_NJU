@@ -13,7 +13,6 @@
     <!-- 注解扫描包 -->
     <context:component-scan base-package="edu.nju.aqi"/>
 
-
     <!-- 开启注解 -->
     <mvc:annotation-driven/>
 

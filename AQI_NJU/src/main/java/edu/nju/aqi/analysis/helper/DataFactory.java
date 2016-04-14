@@ -1,6 +1,5 @@
 package edu.nju.aqi.analysis.helper;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,6 +10,7 @@ import org.neuroph.core.learning.TrainingElement;
 import org.neuroph.core.learning.TrainingSet;
 
 import edu.nju.aqi.analysis.impl.WeatherFactory;
+import edu.nju.aqi.dao.AirQualityDao;
 import edu.nju.aqi.dao.WeatherDao;
 import edu.nju.aqi.model.AirQuality;
 import edu.nju.aqi.model.Weather;
@@ -23,6 +23,16 @@ public class DataFactory {
 	private String[] outputDataNames;
 
 	private WeatherDao weatherDao;
+	
+	private AirQualityDao airQualityDao;
+	
+	public void setAirQualityDao(AirQualityDao airQualityDao){
+		this.airQualityDao = airQualityDao;
+	}
+	
+	public AirQualityDao getAirQualityDao(){
+		return this.airQualityDao;
+	}
 
 	public void setWeatherDao(WeatherDao weatherDao) {
 		this.weatherDao = weatherDao;
@@ -62,6 +72,10 @@ public class DataFactory {
 	public String[] getOutputPropertyNames() {
 		return outputDataNames;
 	}
+	
+	public double[] getHistoryAqis(String cityName){
+		return new double[]{};
+	}
 
 	private String[] getPropertyNames(Class<?> clazz) {
 		ArrayList<String> names = new ArrayList<>();
@@ -76,16 +90,15 @@ public class DataFactory {
 		return (String[]) names.toArray(new String[names.size()]);
 	}
 
-	public TrainingSet getTrainingData() {
+	public TrainingSet getTrainingData(String cityName) {
 		TrainingSet set = new TrainingSet(inputDim, outputDim);
-		List<WeatherVoAirQuality> weatherVoAirQuality = weatherDao.getWeatherVoAirQuality();
-		System.out.println("input:" + inputDim);
-		System.out.println("output:" + outputDim);
+		List<WeatherVoAirQuality> weatherVoAirQuality = weatherDao.getWeatherVoAirQuality(cityName);
 		Iterator<WeatherVoAirQuality> iterator = weatherVoAirQuality.iterator();
-		System.out.println(weatherVoAirQuality.size());
 		while (iterator.hasNext()) {
 			WeatherVoAirQuality vo = iterator.next();
-			System.out.println(vo.toString());
+			if (vo.aqi == null) {
+				continue;
+			}
 			SupervisedTrainingElement element = new SupervisedTrainingElement(getInputData(vo.getClass(),vo),
 					getOutputData(vo.getClass(), vo));
 			set.addElement(element);
@@ -99,10 +112,8 @@ public class DataFactory {
 		WeatherFactory weatherFactory = new WeatherFactory();
 		List<Weather> weathers = weatherFactory.getForecastWeather(cityName);
 		Iterator<Weather> iterator = weathers.iterator();
-		int index = 1;
 		while (iterator.hasNext()) {
 			Weather weather = iterator.next();
-			System.out.println(index++ +":" + weather.toString());
 			TrainingElement element = new TrainingElement(getInputData(weather.getClass(), weather));
 			set.addElement(element);
 		}
@@ -141,13 +152,4 @@ public class DataFactory {
 		return data;
 	}
 
-	public static void main(String[] args) {
-		Field field;
-		try {
-			field = WeatherVoAirQuality.class.getDeclaredField("so2");
-			System.err.println(field.getName());
-		} catch (NoSuchFieldException | SecurityException e) {
-			e.printStackTrace();
-		}
-	}
 }

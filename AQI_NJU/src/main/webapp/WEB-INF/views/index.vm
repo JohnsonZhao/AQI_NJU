@@ -34,7 +34,7 @@
 <script type="text/javascript" src="static/dep/jquery/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="static/dep/materialize/js/materialize.js"></script>
 <script type="text/javascript" src="static/js/sea.js"></script>
-<script type="text/javascript" src="static/js/sea-modules/conf/common.js"></script>
+<script type="text/javascript" src="static/js/common.js"></script>
 <script>
     seajs.use(['map','nav'], function (map, nav) {
         map.init();

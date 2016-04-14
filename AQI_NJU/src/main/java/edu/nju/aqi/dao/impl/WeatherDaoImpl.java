@@ -157,8 +157,8 @@ public class WeatherDaoImpl implements WeatherDao {
 	public List<WeatherVoAirQuality> getWeatherVoAirQuality(String cityName) {
 		String hql = "select new edu.nju.aqi.model.WeatherVoAirQualtiy(a.city_name, a.date, w.temp, w.pressure, w.humidity, w.clouds, w.rain, a.aqi, a.pm25, a.pm10, a.co, a.no2, a.o3, a.so2) from weather w, air_quality where w.qualityId = a.id and a.cityName = "
 				+ cityName;
-		String sql = "select a.city_name as cityName, a.date as date, w.temp as temp, w.pressure as pressure, w.humidity as humidity, w.clouds as clouds, w.rain as rain, a.pm25 as pm25, a.pm10 as pm10, a.co as co, a.o3 as o3, a.so2 as so2 from weather w, air_quality a where w.qualityId=a.id and a.cityName = "
-				+ cityName;
+		String sql = "select a.city_name as cityName, a.date as date, a.aqi as aqi, w.temp as temp, w.pressure as pressure, w.humidity as humidity, w.clouds as clouds, w.windSpeed as windSpeed, a.pm25 as pm25, a.pm10 as pm10, a.co as co, a.o3 as o3, a.so2 as so2 from weather w, air_quality a where w.qualityId=a.id and w.cityName = '"
+				+ cityName + "'";
 		Session session = getSession();
 		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.aliasToBean(edu.nju.aqi.model.WeatherVoAirQuality.class));
 		@SuppressWarnings("unchecked")
@@ -169,7 +169,7 @@ public class WeatherDaoImpl implements WeatherDao {
 	@Override
 	public List<WeatherVoAirQuality> getWeatherVoAirQuality() {
 		String hql = "select new edu.nju.aqi.model.WeatherVoAirQualtiy(a.city_name, a.date, w.temp, w.pressure, w.huimidity, w.clouds, w.rain, a.aqi, a.pm25, a.pm10, a.co, a.no2, a.o3, a.so2) from weather w, air_quality where w.qualityId = a.id";
-		String sql = "select a.city_name as cityName, a.date as date, w.temp as temp, w.pressure as pressure, w.humidity as humidity, w.clouds as clouds, w.rain as rain, a.pm25 as pm25, a.pm10 as pm10, a.co as co, a.o3 as o3, a.so2 as so2 from weather w, air_quality a where w.qualityId=a.id";
+		String sql = "select a.city_name as cityName, a.date as date, a.aqi as aqi, w.temp as temp, w.pressure as pressure, w.humidity as humidity, w.clouds as clouds, w.windSpeed as windSpeed, a.pm25 as pm25, a.pm10 as pm10, a.co as co, a.o3 as o3, a.so2 as so2 from weather w, air_quality a where w.qualityId=a.id";
 		
 		Session session = getSession();
 		Query query = session.createSQLQuery(sql).setResultTransformer(Transformers.aliasToBean(edu.nju.aqi.model.WeatherVoAirQuality.class));

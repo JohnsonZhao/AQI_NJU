@@ -59,14 +59,14 @@ public class SchedulerJob {
 		WeatherFactory factory = new WeatherFactory("bcf690ecb16b701393b8b0877dfe0806");
 		for(String city:cities){
 			crawlerCity(city);
-			weatherService.addWeather(factory.getCurrentWeather(city));
+//			weatherService.addWeather(factory.getCurrentWeather(city));
 			System.out.println("finish "+ (i++)+" cities!");
 			//延迟1.5s执行获取下个城市的数据，原因是天气API免费接口只允许60/m的访问
-			try {
-				Thread.sleep(1500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+//			try {
+//				Thread.sleep(1500);
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
 		}
 	}
 

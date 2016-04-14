@@ -1,87 +1,105 @@
 package edu.nju.aqi.analysis.impl;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 import edu.nju.aqi.analysis.ICorrelation;
 import edu.nju.aqi.analysis.helper.Degree;
 import edu.nju.aqi.analysis.helper.KeyProperty;
+import edu.nju.aqi.analysis.helper.SimilarityUtils;
 import edu.nju.aqi.dao.AirQualityDao;
 import edu.nju.aqi.model.AirQuality;
 
-public class Correlation implements ICorrelation{
-	private static final double MINIUM = 0.0;
-    private static final double MAX = 1.0;
-    
-//    @Autowired
-    private AirQualityDao airQualityDao;
-    
+public class Correlation implements ICorrelation {
+
+	private double similarity = 0.0;
+	private double correlation = 0.0; 
+			
+	private AirQualityDao airQualityDao;
+
+	public AirQualityDao getAirQualityDao() {
+        return airQualityDao;
+    }
+
+    public void setAirQualityDao(AirQualityDao airQualityDao) {
+        this.airQualityDao = airQualityDao;
+    }
+
 	@Override
 	public Degree getCorrelation(String city1, String city2) {
-		AirQuality airQuality1 = airQualityDao.getCurrentAirQuality(city1);
-		AirQuality airQuality2 = airQualityDao.getCurrentAirQuality(city2);
+		similarity = doSimilarityAnalysis(city1, city2);
+		correlation = doCorrelationAnalysis(city1, city2);
+		return new Degree(similarity, correlation);
+	}
+	
+
+	private double doSimilarityAnalysis(String city1, String city2){
+		List<AirQuality> airQuality1s = airQualityDao.getTodaysAirQuality(city1);
+		List<AirQuality> airQuality2s = airQualityDao.getTodaysAirQuality(city2);
 		
-		Map<String, Double> map1 = new HashMap<>();
-		Map<String, Double> map2 = new HashMap<>();
+		if (airQuality1s == null || airQuality2s == null || airQuality1s.size() == 0 || airQuality2s.size() == 0) {
+			return 0.0;
+		}
+
+		AirQuality airQuality1 = airQuality1s.get(0);
+		AirQuality airQuality2 =airQuality2s.get(0);
 		Field[] fields = AirQuality.class.getDeclaredFields();
+
+		int count = 0;
 		for (Field field : fields) {
+			field.setAccessible(true);
+			if (field.getAnnotation(KeyProperty.class) != null) {
+				count ++;
+			}
+		}
+		double[] vector1 = new double[count];
+		double[] vector2 = new double[count];
+		int index = 0;
+		for(Field field: fields){
+			field.setAccessible(true);
 			if (field.getAnnotation(KeyProperty.class) == null) {
 				continue;
 			}
-			String fieldName = field.getName();
 			try {
 				if (field.get(airQuality1) != null && !field.get(airQuality1).equals("")) {
-					map1.put(fieldName, field.getDouble(airQuality1));
+					vector1[index] = Double.parseDouble((String)field.get(airQuality1));
 				}
-				if (field.get(airQuality2) != null && !field.get(airQuality2).equals("")) {
-					map2.put(fieldName, field.getDouble(airQuality2));
+				if (field.get(airQuality2)!= null && !field.get(airQuality2).equals("")) {
+					vector2[index] = Double.parseDouble((String)field.get(airQuality2));
 				}
+				index ++;
 			} catch (IllegalArgumentException | IllegalAccessException | SecurityException e) {
-				System.out.println("Error: while getting correlation " + e);
+				System.out.println("Error: while getting similarity " + e);
 			}
 		}
-		return getCorrelation(map1, map2);
+		return SimilarityUtils.cosineSimilarity(vector1, vector2);
 	}
 	
-	private Degree getCorrelation(Map<String, Double> map1, Map<String, Double> map2){
-		 double correlation = 0.0;
-	        double sum1 = 0.0, sum2 = 0.0;
-	        double squareSum1 = 0.0, squareSum2 = 0.0;
-	        double productSum = 0.0;
-	        int commonItemLen = 0;
-
-	        Iterator<String> iterator1 = map1.keySet().iterator();
-	        while (iterator1.hasNext()) {
-	            String key1 = iterator1.next();
-	            Double value1 = map1.get(key1);
-	            Double value2 = map2.get(key1);
-	            if (value2 == null) {
-	                continue;
-	            }
-	            commonItemLen++;
-	            //求和
-	            sum1 += value1;
-	            sum2 += value2;
-
-	            //平方和
-	            squareSum1 += Math.pow(value1, 2);
-	            squareSum2 += Math.pow(value2, 2);
-
-	            //乘积和
-	            productSum += value1 * value2;
-	        }
-	        if (commonItemLen < 1) {
-	            correlation = MINIUM;
-	           return new Degree(correlation);
-	        }
-	        double num = commonItemLen * productSum - sum1 * sum2;
-	        double den = Math.sqrt((commonItemLen * squareSum1 - Math.pow(sum1, 2)) * (commonItemLen * squareSum2 - Math.pow(sum2, 2)));
-	        correlation = (Double.compare(den, 0.0) == 0) ? MAX : num/den;
-	        return new Degree(correlation);
+	private double doCorrelationAnalysis(String city1, String city2){
+		List<AirQuality> airQuality1s = airQualityDao.get24HoursAirQuality(city1);
+		List<AirQuality> airQuality2s = airQualityDao.get24HoursAirQuality(city2);
+		
+		if (airQuality1s == null || airQuality2s == null || airQuality1s.size() == 0 || airQuality2s.size() == 0) {
+			return 0.0;
+		}
+		int len1 = airQuality1s.size();
+		int len2 = airQuality2s.size();
+		int len = len1 > len2 ? len2: len1;
+		double[] vector1 = new double[len];
+		double[] vector2 = new double[len];
+		int index = 0;
+		for(int i = 0; i < len1; i ++){
+			String time1 = airQuality1s.get(i).getDate();
+			for(int j = 0; j > len2; j ++){
+				if (time1.equals(airQuality2s.get(j).getDate())) {
+					vector1[index] = Double.parseDouble(airQuality1s.get(i).getAqi());
+					vector2[index] = Double.parseDouble(airQuality2s.get(j).getAqi());
+					index ++;
+					break;
+				}
+			}
+		}
+		return SimilarityUtils.pearsonCorrelation(vector1, vector2);
 	}
-
 }
