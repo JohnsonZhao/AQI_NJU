@@ -164,4 +164,16 @@ public class AirQualityDaoImpl implements AirQualityDao {
         System.out.println(list);
         return list;
 	}
+
+	@Override
+	public List<AirQuality> getPastHoursAirQuality(String city, int hourNum) {
+		String sql = "SELECT * FROM air_quality WHERE date > DATE_FORMAT(DATE_SUB(NOW(), INTERVAL "+hourNum+" HOUR),'%Y_%m_%d_%H') and id LIKE '"+city+"%';";
+		Session session = getSession();
+        SQLQuery query = session.createSQLQuery(sql);
+        query.addEntity(AirQuality.class);
+        @SuppressWarnings("unchecked")
+		List<AirQuality> list = query.list();
+        System.out.println(list);
+        return list;
+	}
 }

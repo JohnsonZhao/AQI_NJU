@@ -65,4 +65,11 @@ public class AirQualityController {
     	//System.out.println(airQualityService.get24HoursAirQuality(city));
         return airQualityService.get24HoursAirQuality(city);
     }
+    
+    @ResponseBody
+    @RequestMapping("/getPastHoursAirQuality")
+    public List<AirQuality> getPastHoursAirQuality(String city,int hourNum, HttpServletRequest request) {
+    	//System.out.println(airQualityService.get24HoursAirQuality(city));
+        return airQualityService.getPastHoursAirQuality(city, hourNum);
+    }
 }
