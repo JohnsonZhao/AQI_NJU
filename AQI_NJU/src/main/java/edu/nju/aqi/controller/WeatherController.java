@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edu.nju.aqi.analysis.helper.AreaCorrelation;
+import edu.nju.aqi.analysis.helper.IndexCorrelation;
 import edu.nju.aqi.model.AirQuality;
 import edu.nju.aqi.service.AnalysisService;
 import edu.nju.aqi.service.WeatherService;
@@ -28,7 +30,7 @@ public class WeatherController {
 
 	@RequestMapping("/forecast")
 	public String getForcast(String cityName, HttpServletRequest request) {
-		List<AirQuality> airQualities = analysisService.predict("abazhou");
+		List<AirQuality> airQualities = analysisService.predict("shanghai");
 		if (airQualities != null) {
 
 			for (AirQuality airQuality : airQualities) {
@@ -42,8 +44,10 @@ public class WeatherController {
 	public String getCorrelation(String cityName1, String cityName2, HttpServletRequest request){
 		String name1 = "baoji";
 		String name2 = "baoji";
-		String result = analysisService.getCorrelation(name1, name2);
-		System.out.println(result);
+		AreaCorrelation result = (AreaCorrelation) analysisService.getCorrelation(name1, name2);
+		System.out.println(result.toString());
+		List<IndexCorrelation> indexCorrelations = analysisService.getCorrelation(name1);
+		System.err.println(indexCorrelations.toString());
 		return "/login";
 	}
 }

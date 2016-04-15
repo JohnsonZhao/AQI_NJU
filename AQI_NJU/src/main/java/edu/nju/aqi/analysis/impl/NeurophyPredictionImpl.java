@@ -53,7 +53,7 @@ public class NeurophyPredictionImpl implements IPrediction {
 	}
 
 	@Override
-	public List<Map<String, Double>> execute(String cityName) {
+	public List<Map<String, Object>> execute(String cityName) {
 		doTrain(cityName);
 		while (isTrained) {
 			return doPredict(cityName);
@@ -98,18 +98,18 @@ public class NeurophyPredictionImpl implements IPrediction {
 	}
 
 	@Override
-	public List<Map<String, Double>> doPredict(String cityName) {
+	public List<Map<String, Object>> doPredict(String cityName) {
 		if (!isTrained) {
 			throw new RuntimeException("no training!");
 		}
-		ArrayList<Map<String, Double>> results = new ArrayList<Map<String, Double>>(14);
+		ArrayList<Map<String, Object>> results = new ArrayList<Map<String, Object>>(14);
 		TrainingSet realSet = dataFactory.getRealData(cityName);
 		for (TrainingElement element : realSet.trainingElements()) {
 			network.setInput(element.getInput());
 			network.calculate();
 			Vector<Double> actualOutput = network.getOutput();
 
-			Map<String, Double> oneday = new HashMap<String, Double>();
+			Map<String, Object> oneday = new HashMap<String, Object>();
 			String[] outputNames = dataFactory.getOutputPropertyNames();
 			for (int i = 0; i < outputNames.length; i++) {
 				oneday.put(outputNames[i], actualOutput.get(i));

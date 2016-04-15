@@ -54,7 +54,7 @@ public class LineRegressionPredict implements IPrediction {
 	}
 
 	@Override
-	public List<Map<String, Double>> execute(String cityName) {
+	public List<Map<String, Object>> execute(String cityName) {
 		this.cityName = cityName;
 		doTrain(cityName);
 		while (isTrained) {
@@ -87,14 +87,14 @@ public class LineRegressionPredict implements IPrediction {
 	}
 
 	@Override
-	public List<Map<String, Double>> doPredict(String cityName) {
+	public List<Map<String, Object>> doPredict(String cityName) {
 		if (!isTrained) {
 			throw new RuntimeException("no training");
 		}
 		TrainingSet set = dataFactory.getRealData(cityName);
 		Vector<TrainingElement> elements = set.trainingElements();
 		Iterator<TrainingElement> iterator = elements.iterator();
-		List<Map<String, Double>> results = new ArrayList<>(set.size());
+		List<Map<String, Object>> results = new ArrayList<>(set.size());
 		while(iterator.hasNext()){
 			TrainingElement element = iterator.next();
 			double value = 0.0;
@@ -103,11 +103,10 @@ public class LineRegressionPredict implements IPrediction {
 			for(int i = 0; i< inputs.size(); i++){
 				value += theta[i+1]* inputs.get(i);
 			}
-			Map<String, Double> map = new HashMap<>(1);
+			Map<String, Object> map = new HashMap<>(1);
 			map.put(dataFactory.getOutputPropertyNames()[0], value);
 			results.add(map);
 		}
-		System.err.println(results.toString());
 		printTheta();
 		return results;
 				

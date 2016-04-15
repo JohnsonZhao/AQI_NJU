@@ -16,6 +16,11 @@ public class DateUtils {
 		return getDateStr(FORMAT_DEFAULT);
 	}
 	
+	public static String getDateStr(Date date){
+		SimpleDateFormat format = new SimpleDateFormat(FORMAT_DEFAULT);
+		return format.format(date);
+	}
+	
 	public static String getDateStr(String formatStr){
 		SimpleDateFormat format = new SimpleDateFormat(formatStr);
 		Date date = new Date();
@@ -48,7 +53,7 @@ public class DateUtils {
 		return String.valueOf(date.getTime());
 	}
 	
-	public static java.sql.Timestamp geTimestamp(){
+	public static java.sql.Timestamp getTimestamp(){
 		Date date = new Date();
 		java.sql.Timestamp time = new java.sql.Timestamp(date.getTime());
 		return time;

@@ -161,7 +161,7 @@ public class WeatherFactory {
 			return null;
 		}
 		Weather weather = new Weather();
-		weather.setDate(DateUtils.geTimestamp());
+		weather.setDate(DateUtils.getTimestamp());
 
 		JSONObject mainObject = object.getJSONObject(JSONConstants.KEY_MAIN);
 

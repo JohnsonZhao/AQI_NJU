@@ -34,13 +34,13 @@ public class ARIMA {
 		double prefixValue = predictValue * avgsumData + avgsumData;
 		for(int i = 0; i< period; i++){
 			//对结果进行反差分处理
-			results[i] = (int) (prefixValue + originalData[len - period + i]);
+			results[i] = (int) (prefixValue + originalData[len - period + i-1]);
 		}
 		return results;
 	}
 
 	/**
-	 * 预处理：Z-score归一化
+	 * 预处理：差分处理,Z-score归一化
 	 * 
 	 * @return
 	 */

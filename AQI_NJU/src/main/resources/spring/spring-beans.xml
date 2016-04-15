@@ -49,15 +49,18 @@
 		<property name="WeatherDao">
 			<ref bean="WeatherDao" />
 		</property>
+		<property name="AirQualityDao">
+			<ref bean="AirQualityDao" />
+		</property>
 	</bean>
 
-	<bean id="Prediction" class="edu.nju.aqi.analysis.impl.PredictionImpl">
+	<bean id="Prediction" class="edu.nju.aqi.analysis.impl.ARIMAPredict">
 		<property name="DataFactory">
 			<ref bean="DataFactory" />
 		</property>
 	</bean>
 
-	<bean id="Correlation" class="edu.nju.aqi.analysis.impl.Correlation">
+	<bean id="Correlation" class="edu.nju.aqi.analysis.impl.CorrelationAnalysis">
 		<property name="AirQualityDao">
 			<ref bean="AirQualityDao" />
 		</property>

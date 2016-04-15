@@ -74,7 +74,26 @@ public class DataFactory {
 	}
 	
 	public double[] getHistoryAqis(String cityName){
-		return new double[]{};
+		List<AirQuality> airQualities = airQualityDao.getPastHoursAirQuality(cityName, 1000);
+		double[] values = new double[airQualities.size()];
+		int i = 0;
+		for(int j = 0; j< airQualities.size(); j++){
+			String aqiStr = airQualities.get(j).getAqi();
+			double value = Double.valueOf(aqiStr);
+			if (aqiStr ==null || aqiStr.equals("") || Double.compare(value, 0) == 0) {
+				if(i != 0){
+					//用前一个值替代，认为短时间内aqi不会发生太大变化
+					value = values[i-1];
+				}
+				else{
+					continue;
+				}
+			}
+			
+			values[i++] = value;
+		}
+		
+		return values;
 	}
 
 	private String[] getPropertyNames(Class<?> clazz) {

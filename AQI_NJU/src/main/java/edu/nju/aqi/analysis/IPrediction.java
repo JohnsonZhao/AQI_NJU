@@ -10,7 +10,7 @@ public interface IPrediction {
 	 * @param cityName
 	 * @return
 	 */
-	public List<Map<String, Double>> execute(String cityName);
+	public List<Map<String, Object>> execute(String cityName);
 
 	/**
 	 * 模型生成
@@ -23,7 +23,7 @@ public interface IPrediction {
      * @param cityName
      * @return
      */
-    public List<Map<String, Double>> doPredict(String cityName);
+    public List<Map<String, Object>> doPredict(String cityName);
 
     /**
      * 设定误差范围
