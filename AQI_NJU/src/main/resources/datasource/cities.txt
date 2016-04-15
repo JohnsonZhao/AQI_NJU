@@ -1,369 +1,369 @@
-abazhou
-akesudiqu
-alashanmeng
-aletaidiqu
-alidiqu
-ankang
-anqing
-anshan
-anshun
-anyang
-baicheng
-baise
-baishan
-baiyin
-baoding
-baoji
-baoshan
-baotou
-bayannaoer
-bazhong
-beihai
-beijing
-bengbu
-benxi
-bijie
-binzhou
-boertala
-bozhou
-cangzhou
-changchun
-changde
-changdudiqu
-changjizhou
-changsha
-changshu
-changzhi
-changzhou
-chaoyang
-chaozhou
-chengde
-chengdu
-chenzhou
-chifeng
-chizhou
-chongqing
-chongzuo
-chuxiongzhou
-chuzhou
-dalian
-dalizhou
-dandong
-daqing
-datong
-daxinganlingde
-daxinganlingdiqu
-dazhou
-dehongzhou
-deyang
-dezhou
-dingxi
-diqingzhou
-dongguan
-dongying
-eerduosi
-enshizhou
-ezhou
-fangchenggang
-foshan
-fushun
-fuxin
-fuyang
-fuyangshi
-fuzhou
-fuzhoushi
-gannanzhou
-ganzhou
-ganzizhou
-guangan
-guangyuan
-guangzhou
-guigang
-guilin
-guiyang
-guoluozhou
-guyuan
-haerbin
-haibeizhou
-haidongdiqu
-haikou
-haimen
-hainanzhou
-haixizhou
-hamidiqu
-handan
-hangzhou
-hanzhong
-hebi
-hechi
-hefei
-hegang
-heihe
-hengshui
-hengyang
-hetiandiqu
-heyuan
-heze
-hezhou
-honghezhou
-huaian
-huaibei
-huaihua
-huainan
-huanggang
-huangnanzhou
-huangshan
-huangshi
-huhehaote
-huizhou
-huludao
-hulunbeier
-huzhou
-jiamusi
-jian
-jiangmen
-jiangyin
-jiaonan
-jiaozhou
-jiaozuo
-jiaxing
-jiayuguan
-jieyang
-jilin
-jimo
-jinan
-jinchang
-jincheng
-jingdezhen
-jingmen
-jingzhou
-jinhua
-jining
-jintan
-jinzhong
-jinzhou
-jiujiang
-jiuquan
-jixi
-jurong
-kaifeng
-kashediqu
-kelamayi
-kezhou
-kuerle
-kunming
-kunshan
-laibin
-laiwu
-laixi
-laizhou
-langfang
-lanzhou
-lasa
-leshan
-liangshanzhou
-lianyungang
-liaocheng
-liaoyang
-liaoyuan
-lijiang
-linan
-lincang
-linfen
-linxiazhou
-linyi
-linzhidiqu
-lishui
-liupanshui
-liuzhou
-liyang
-longnan
-longyan
-loudi
-luan
-luohe
-luoyang
-luzhou
-lvliang
-maanshan
-maoming
-meishan
-meizhou
-mianyang
-mudanjiang
-nanchang
-nanchong
-nanjing
-nanning
-nanping
-nantong
-nanyang
-naqudiqu
-neijiang
-ningbo
-ningde
-nujiangzhou
-panjin
-panzhihua
-penglai
-pingdingshan
-pingdu
-pingliang
-pingxiang
-puer
-putian
-puyang
-qiandongnanzhou
-qiannanzhou
-qianxinanzhou
-qingdao
-qingyang
-qingyuan
-qinhuangdao
-qinzhou
-qiqihaer
-qitaihe
-quanzhou
-qujing
-quzhou
-rikazediqu
-rizhao
-rongcheng
-rushan
-sanmenxia
-sanming
-sanya
-shanghai
-shangluo
-shangqiu
-shangrao
-shannandiqu
-shantou
-shanwei
-shaoguan
-shaoxing
-shaoyang
-shenyang
-shenzhen
-shihezi
-shijiazhuang
-shiyan
-shizuishan
-shouguang
-shuangyashan
-shuozhou
-siping
-songyuan
-suihua
-suining
-suizhou
-suqian
-suzhou
-suzhoushi
-tachengdiqu
-taian
-taicang
-taiyuan
-taizhou
-taizhoushi
-tangshan
-tianjin
-tianshui
-tieling
-tongchuan
-tonghua
-tongliao
-tongling
-tongrendiqu
-tulufandiqu
-wafangdian
-weifang
-weihai
-weinan
-wendeng
-wenshanzhou
-wenzhou
-wuhai
-wuhan
-wuhu
-wujiang
-wujiaqu
-wulanchabu
-wulumuqi
-wuwei
-wuxi
-wuzhong
-wuzhou
-xiamen
-xian
-xiangtan
-xiangxizhou
-xiangyang
-xianning
-xianyang
-xiaogan
-xilinguolemeng
-xinganmeng
-xingtai
-xining
-xinxiang
-xinyang
-xinyu
-xinzhou
-xishuangbannazhou
-xuancheng
-xuchang
-xuzhou
-yaan
-yanan
-yanbianzhou
-yancheng
-yangjiang
-yangquan
-yangzhou
-yantai
-yibin
-yichang
-yichun
-yichunshi
-yilihasake
-yilihasakezhou
-yinchuan
-yingkou
-yingtan
-yiwu
-yixing
-yiyang
-yongzhou
-yueyang
-yulin
-yulinshi
-yuncheng
-yunfu
-yushuzhou
-yuxi
-zaozhuang
-zhangjiagang
-zhangjiajie
-zhangjiakou
-zhangqiu
-zhangye
-zhangzhou
-zhanjiang
-zhaoqing
-zhaotong
-zhaoyuan
-zhengzhou
-zhenjiang
-zhongshan
-zhongwei
-zhoukou
-zhoushan
-zhuhai
-zhuji
-zhumadian
-zhuzhou
-zibo
-zigong
-ziyang
-zunyi
+abazhou 阿坝州
+akesudiqu 阿克苏地区
+alashanmeng 阿拉善盟
+aletaidiqu 阿勒泰地区
+alidiqu 阿里地区
+ankang 安康
+anqing 安庆
+anshan 鞍山
+anshun 安顺
+anyang 安阳
+baicheng 白城
+baise 百色
+baishan 白山
+baiyin 白银
+baoding 保定
+baoji 宝鸡
+baoshan 保山
+baotou 包头
+bayannaoer 巴彦淖尔
+bazhong 巴中
+beihai 北海
+beijing 北京
+bengbu 蚌埠
+benxi 本溪
+bijie 毕节
+binzhou 滨州
+boertala 博州
+bozhou 亳州
+cangzhou 沧州
+changchun 长春
+changde 常德
+changdudiqu 昌都地区
+changjizhou 昌吉州
+changsha 长沙
+changshu 常熟
+changzhi 长治
+changzhou 常州
+chaoyang 朝阳
+chaozhou 潮州
+chengde 承德
+chengdu 成都
+chenzhou 郴州
+chifeng 赤峰
+chizhou 池州
+chongqing 重庆
+chongzuo 崇左
+chuxiongzhou 楚雄州
+chuzhou 滁州
+dalian 大连
+dalizhou 大理州
+dandong 丹东
+daqing 大庆
+datong 大同
+daxinganlingde 大兴安岭地
+daxinganlingdiqu 大兴安岭地区
+dazhou 达州
+dehongzhou 德宏州
+deyang 德阳
+dezhou 德州
+dingxi 定西
+diqingzhou 迪庆州
+dongguan 东莞
+dongying 东营
+eerduosi 鄂尔多斯
+enshizhou 恩施州
+ezhou 鄂州
+fangchenggang 防城港
+foshan 佛山
+fushun 抚顺
+fuxin 阜新
+fuyang 阜阳
+fuyangshi 富阳
+fuzhou 福州
+fuzhoushi 抚州
+gannanzhou 甘南州
+ganzhou 赣州
+ganzizhou 甘孜州
+guangan 广安
+guangyuan 广元
+guangzhou 广州
+guigang 贵港
+guilin 桂林
+guiyang 贵阳
+guoluozhou 果洛州
+guyuan 固原
+haerbin 哈尔滨
+haibeizhou 海北州
+haidongdiqu 海东地区
+haikou 海口
+haimen 海门
+hainanzhou 海南州
+haixizhou 海西州
+hamidiqu 哈密地区
+handan 邯郸
+hangzhou 杭州
+hanzhong 汉中
+hebi 鹤壁
+hechi 河池
+hefei 合肥
+hegang 鹤岗
+heihe 黑河
+hengshui 衡水
+hengyang 衡阳
+hetiandiqu 和田地区
+heyuan 河源
+heze 菏泽
+hezhou 贺州
+honghezhou 红河州
+huaian 淮安
+huaibei 淮北
+huaihua 怀化
+huainan 淮南
+huanggang 黄冈
+huangnanzhou 黄南州
+huangshan 黄山
+huangshi 黄石
+huhehaote 呼和浩特
+huizhou 惠州
+huludao 葫芦岛
+hulunbeier 呼伦贝尔
+huzhou 湖州
+jiamusi 佳木斯
+jian 吉安
+jiangmen 江门
+jiangyin 江阴
+jiaonan 胶南
+jiaozhou 胶州
+jiaozuo 焦作
+jiaxing 嘉兴
+jiayuguan 嘉峪关
+jieyang 揭阳
+jilin 吉林
+jimo 即墨
+jinan 济南
+jinchang 金昌
+jincheng 晋城
+jingdezhen 景德镇
+jingmen 荆门
+jingzhou 荆州
+jinhua 金华
+jining 济宁
+jintan 金坛
+jinzhong 晋中
+jinzhou 锦州
+jiujiang 九江
+jiuquan 酒泉
+jixi 鸡西
+jurong 句容
+kaifeng 开封
+kashediqu 喀什地区
+kelamayi 克拉玛依
+kezhou 克州
+kuerle 库尔勒
+kunming 昆明
+kunshan 昆山
+laibin 来宾
+laiwu 莱芜
+laixi 莱西
+laizhou 莱州
+langfang 廊坊
+lanzhou 兰州
+lasa 拉萨
+leshan 乐山
+liangshanzhou 凉山州
+lianyungang 连云港
+liaocheng 聊城
+liaoyang 辽阳
+liaoyuan 辽源
+lijiang 丽江
+linan 临安
+lincang 临沧
+linfen 临汾
+linxiazhou 临夏州
+linyi 临沂
+linzhidiqu 林芝地区
+lishui 丽水
+liupanshui 六盘水
+liuzhou 柳州
+liyang 溧阳
+longnan 陇南
+longyan 龙岩
+loudi 娄底
+luan 六安
+luohe 漯河
+luoyang 洛阳
+luzhou 泸州
+lvliang 吕梁
+maanshan 马鞍山
+maoming 茂名
+meishan 眉山
+meizhou 梅州
+mianyang 绵阳
+mudanjiang 牡丹江
+nanchang 南昌
+nanchong 南充
+nanjing 南京
+nanning 南宁
+nanping 南平
+nantong 南通
+nanyang 南阳
+naqudiqu 那曲地区
+neijiang 内江
+ningbo 宁波
+ningde 宁德
+nujiangzhou 怒江州
+panjin 盘锦
+panzhihua 攀枝花
+penglai 蓬莱
+pingdingshan 平顶山
+pingdu 平度
+pingliang 平凉
+pingxiang 萍乡
+puer 普洱
+putian 莆田
+puyang 濮阳
+qiandongnanzhou 黔东南州
+qiannanzhou 黔南州
+qianxinanzhou 黔西南州
+qingdao 青岛
+qingyang 庆阳
+qingyuan 清远
+qinhuangdao 秦皇岛
+qinzhou 钦州
+qiqihaer 齐齐哈尔
+qitaihe 七台河
+quanzhou 泉州
+qujing 曲靖
+quzhou 衢州
+rikazediqu 日喀则地区
+rizhao 日照
+rongcheng 荣成
+rushan 乳山
+sanmenxia 三门峡
+sanming 三明
+sanya 三亚
+shanghai 上海
+shangluo 商洛
+shangqiu 商丘
+shangrao 上饶
+shannandiqu 山南地区
+shantou 汕头
+shanwei 汕尾
+shaoguan 韶关
+shaoxing 绍兴
+shaoyang 邵阳
+shenyang 沈阳
+shenzhen 深圳
+shihezi 石河子
+shijiazhuang 石家庄
+shiyan 十堰
+shizuishan 石嘴山
+shouguang 寿光
+shuangyashan 双鸭山
+shuozhou 朔州
+siping 四平
+songyuan 松原
+suihua 绥化
+suining 遂宁
+suizhou 随州
+suqian 宿迁
+suzhou 苏州
+suzhoushi 宿州
+tachengdiqu 塔城地区
+taian 泰安
+taicang 太仓
+taiyuan 太原
+taizhou 台州
+taizhoushi 泰州
+tangshan 唐山
+tianjin 天津
+tianshui 天水
+tieling 铁岭
+tongchuan 铜川
+tonghua 通化
+tongliao 通辽
+tongling 铜陵
+tongrendiqu 铜仁地区
+tulufandiqu 吐鲁番地区
+wafangdian 瓦房店
+weifang 潍坊
+weihai 威海
+weinan 渭南
+wendeng 文登
+wenshanzhou 文山州
+wenzhou 温州
+wuhai 乌海
+wuhan 武汉
+wuhu 芜湖
+wujiang 吴江
+wujiaqu 五家渠
+wulanchabu 乌兰察布
+wulumuqi 乌鲁木齐
+wuwei 武威
+wuxi 无锡
+wuzhong 吴忠
+wuzhou 梧州
+xiamen 厦门
+xian 西安
+xiangtan 湘潭
+xiangxizhou 湘西州
+xiangyang 襄阳
+xianning 咸宁
+xianyang 咸阳
+xiaogan 孝感
+xilinguolemeng 锡林郭勒盟
+xinganmeng 兴安盟
+xingtai 邢台
+xining 西宁
+xinxiang 新乡
+xinyang 信阳
+xinyu 新余
+xinzhou 忻州
+xishuangbannazhou 西双版纳州
+xuancheng 宣城
+xuchang 许昌
+xuzhou 徐州
+yaan 雅安
+yanan 延安
+yanbianzhou 延边州
+yancheng 盐城
+yangjiang 阳江
+yangquan 阳泉
+yangzhou 扬州
+yantai 烟台
+yibin 宜宾
+yichang 宜昌
+yichun 宜春
+yichunshi 伊春
+yilihasake 伊犁哈萨克
+yilihasakezhou 伊犁哈萨克州
+yinchuan 银川
+yingkou 营口
+yingtan 鹰潭
+yiwu 义乌
+yixing 宜兴
+yiyang 益阳
+yongzhou 永州
+yueyang 岳阳
+yulin 玉林
+yulinshi 榆林
+yuncheng 运城
+yunfu 云浮
+yushuzhou 玉树州
+yuxi 玉溪
+zaozhuang 枣庄
+zhangjiagang 张家港
+zhangjiajie 张家界
+zhangjiakou 张家口
+zhangqiu 章丘
+zhangye 张掖
+zhangzhou 漳州
+zhanjiang 湛江
+zhaoqing 肇庆
+zhaotong 昭通
+zhaoyuan 招远
+zhengzhou 郑州
+zhenjiang 镇江
+zhongshan 中山
+zhongwei 中卫
+zhoukou 周口
+zhoushan 舟山
+zhuhai 珠海
+zhuji 诸暨
+zhumadian 驻马店
+zhuzhou 株洲
+zibo 淄博
+zigong 自贡
+ziyang 资阳
+zunyi 遵义
