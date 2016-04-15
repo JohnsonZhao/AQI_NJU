@@ -3,6 +3,7 @@ package edu.nju.aqi.controller;
 import edu.nju.aqi.bo.AirQualityBo;
 import edu.nju.aqi.model.AirQuality;
 import edu.nju.aqi.service.AirQualityService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
@@ -48,14 +51,22 @@ public class AirQualityController {
      * @param city(拼音)
      * @return ModelAndView
      */
+    @ResponseBody
     @RequestMapping("/getCurrentAirQuality")
-    public ModelAndView getCurrentAirQuality(String city) {
+    public AirQuality getCurrentAirQuality(String city,HttpServletRequest request) {
 
-        AirQuality airQuality = airQualityService.getCurrentAirQuality(city);
-        ModelAndView modelAndView = new ModelAndView("city");
+    	try {
+			city=new String(city.getBytes("iso-8859-1"),"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 
-        modelAndView.getModel().put("airQuality", airQuality);
-        return modelAndView;
+    	System.out.println("============" + city);
+        AirQuality airQuality = airQualityService.getCurrentAirQualityByChinese(city);
+        //ModelAndView modelAndView = new ModelAndView("city");
+        //System.out.println(airQuality!=null?airQuality.toString():"");
+        //modelAndView.getModel().put("airQuality", airQuality);
+        return airQuality;
     }
 
 
