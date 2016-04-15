@@ -31,7 +31,7 @@ public class CityUtils {
                 try {
                     String lineTxt;
                     while ((lineTxt = reader.readLine()) != null) {
-                        cities.add(lineTxt.trim());
+                        cities.add(lineTxt.trim().split(" ")[0]);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

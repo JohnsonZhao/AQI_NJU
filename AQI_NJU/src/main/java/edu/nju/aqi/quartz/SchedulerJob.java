@@ -79,6 +79,7 @@ public class SchedulerJob {
             String city_name = doc.select("div.city_name").text();
 			String dateStr = live_data_time.substring(live_data_time
 					.indexOf("：") + 1);
+			System.out.println(city+"  live_data_time: "+live_data_time);
 			String date = dateStr.split(" ")[0];
 			String time = dateStr.split(" ")[1];
 			date = date.split("-")[0] + "_" + date.split("-")[1] + "_"
