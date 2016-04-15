@@ -110,5 +110,10 @@ public class AirQualityServiceImpl implements AirQualityService {
 		return airQualityDao.getPastHoursAirQuality(city, hourNum);
 	}
 
+	@Override
+	public AirQuality getCurrentAirQualityByChinese(String city) {
+		return airQualityDao.getCurrentAirQualityByChinese(city);
+	}
+
 
 }

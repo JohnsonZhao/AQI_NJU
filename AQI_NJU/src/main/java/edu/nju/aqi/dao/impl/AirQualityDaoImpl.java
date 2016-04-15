@@ -6,6 +6,14 @@ import edu.nju.aqi.model.AirQuality;
 
 import org.hibernate.*;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
 
 //import org.hibernate.Session;
@@ -130,8 +138,9 @@ public class AirQualityDaoImpl implements AirQualityDao {
 		Query query = session.createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List<AirQuality> list = query.list();
-        //System.out.println(list.get(0).toString());
-        return (AirQuality)list.get(0);
+		if(list.size()>0)
+			return (AirQuality)list.get(0);
+		return null;
     }
 
     @Override
@@ -175,5 +184,40 @@ public class AirQualityDaoImpl implements AirQualityDao {
 		List<AirQuality> list = query.list();
         System.out.println(list);
         return list;
+	}
+
+	@Override
+	public AirQuality getCurrentAirQualityByChinese(String city) {
+		HashMap<String,String> map = getNameMap();
+		//System.out.println("==============="+map.size()+"==============");
+		String realCity = "";
+		if(map.get(city)!=null&&!map.get(city).equals(""))
+			realCity = map.get(city);
+		else
+			realCity = city;
+		return getCurrentAirQuality(realCity);
+	}
+	
+	private HashMap<String,String> getNameMap(){
+		HashMap<String,String> map = new HashMap<String,String>();
+		String encoding = "utf-8";
+		String path = this.getClass().getClassLoader().getResource("/datasource/cities.txt").getPath();
+		File file = new File(path);
+		InputStreamReader read;
+		try {
+			read = new InputStreamReader(new FileInputStream(file),encoding);
+			BufferedReader reader = new BufferedReader(read);
+			String lineTxt = "";
+			while((lineTxt = reader.readLine())!=null){
+				map.put(lineTxt.split(" ")[1], lineTxt.split(" ")[0]);
+			}
+			read.close();
+		} catch (UnsupportedEncodingException | FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return map;
 	}
 }
