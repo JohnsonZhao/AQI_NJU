@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -94,6 +95,13 @@ public class AirQualityController {
     public List<AirQuality> getPastHoursAirQuality(String city,int hourNum, HttpServletRequest request) {
     	//System.out.println(airQualityService.get24HoursAirQuality(city));
         return airQualityService.getPastHoursAirQuality(city, hourNum);
+    }
+    
+    @ResponseBody
+    @RequestMapping("/getPastDaysAirQuality")
+    public HashMap<String,String> getPastDaysAirQuality(String city,int dayNum, HttpServletRequest request) {
+    	//System.out.println(airQualityService.get24HoursAirQuality(city));
+        return airQualityService.getPastDaysAirQuality(city, dayNum);
     }
 
     /**

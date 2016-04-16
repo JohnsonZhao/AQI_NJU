@@ -114,6 +114,11 @@ public class AirQualityServiceImpl implements AirQualityService {
 	public AirQuality getCurrentAirQualityByChinese(String city) {
 		return airQualityDao.getCurrentAirQualityByChinese(city);
 	}
+	
+	@Override
+	public HashMap<String,String> getPastDaysAirQuality(String city, int dayNum){
+		return airQualityDao.getPastDaysAirQuality(city, dayNum);
+	}
 
 
 }

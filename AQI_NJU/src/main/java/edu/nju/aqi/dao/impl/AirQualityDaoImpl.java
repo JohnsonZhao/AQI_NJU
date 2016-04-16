@@ -3,8 +3,10 @@ package edu.nju.aqi.dao.impl;
 import edu.nju.aqi.dao.AirQualityDao;
 import edu.nju.aqi.meta.DateUtils;
 import edu.nju.aqi.model.AirQuality;
+import edu.nju.aqi.model.DayAqiModel;
 
 import org.hibernate.*;
+import org.hibernate.transform.Transformers;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -219,5 +221,23 @@ public class AirQualityDaoImpl implements AirQualityDao {
 		}
 		
 		return map;
+	}
+
+	@Override
+	public HashMap<String,String> getPastDaysAirQuality(String city, int dayNum) {
+		int hourNum = dayNum*24;
+		String sql = "SELECT SUBSTRING(date,1,10) as dayStr,AVG(aqi) as avgAqi FROM air_quality WHERE date > DATE_FORMAT(DATE_SUB(NOW(), INTERVAL "+hourNum+" HOUR),'%Y_%m_%d_%H') and id LIKE '"+city+"%' GROUP BY dayStr ORDER BY dayStr ASC;";
+		Session session = getSession();
+        SQLQuery query = session.createSQLQuery(sql);
+        //query.setResultTransformer(Transformers.aliasToBean(DayAqiModel.class));
+        @SuppressWarnings("unchecked")
+        List<Object[]> list = query.list();
+		HashMap<String,String> map = new HashMap<String,String>();
+        for(Object[] ob:list){
+        	String day = ob[0].toString();
+        	String aqi = ob[1].toString();
+        	map.put(day, aqi);
+        }
+        return map;
 	}
 }
