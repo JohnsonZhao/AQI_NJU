@@ -111,6 +111,12 @@ nav {
     border-radius: 50%;
     margin: 10px 0px 5px 15px;
 }
+.leaflet-control-locate {
+    background-size: 18px;
+    width: 28px;
+    height: 28px;
+    background: white url('../images/ic_location_searching.png') no-repeat center center;
+}
 
 .leaflet_info_border_level1 {
     border: #6eb720 solid 2px;
@@ -144,6 +150,28 @@ nav {
 
 .leaflet_info_border_level3.leaflet_levelInfo, .leaflet_info_border_level4.leaflet_levelInfo, .leaflet_info_border_level5.leaflet_levelInfo, .leaflet_info_border_level6.leaflet_levelInfo {
     font-size: 12px;
+}
+
+
+.zoom {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    /* border-bottom-color: rgb(204, 204, 204); */
+    color: #444;
+    display: block;
+    height: 26px;
+    width: 26px;
+    line-height: 1.45 !important;
+    text-align: center;
+    text-decoration: none;
+    font: bold 18px'Lucida Console', Monaco, monospace;
+}
+
+.blur {
+    -webkit-filter: blur(10px); /* Chrome, Opera */
+    -moz-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
 }
 
 @charset "UTF-8";

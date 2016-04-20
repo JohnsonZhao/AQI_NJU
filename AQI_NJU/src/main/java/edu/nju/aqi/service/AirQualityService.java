@@ -4,7 +4,6 @@ import edu.nju.aqi.bo.AirQualityBo;
 import edu.nju.aqi.dao.AirQualityDao;
 import edu.nju.aqi.model.AirQuality;
 
-import java.util.HashMap;
 import java.util.List;
 
 public interface AirQualityService {
@@ -32,5 +31,5 @@ public interface AirQualityService {
 	
 	public List<AirQuality> getPastHoursAirQuality(String city, int hourNum);
 	
-	public HashMap<String,String> getPastDaysAirQuality(String city, int dayNum);
+	public List<AirQuality> getPastDaysAirQuality(String city, int dayNum);
 }

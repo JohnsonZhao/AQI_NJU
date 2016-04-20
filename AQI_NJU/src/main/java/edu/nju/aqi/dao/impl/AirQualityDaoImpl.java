@@ -3,18 +3,10 @@ package edu.nju.aqi.dao.impl;
 import edu.nju.aqi.dao.AirQualityDao;
 import edu.nju.aqi.meta.DateUtils;
 import edu.nju.aqi.model.AirQuality;
-import edu.nju.aqi.model.DayAqiModel;
-
 import org.hibernate.*;
-import org.hibernate.transform.Transformers;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -224,20 +216,51 @@ public class AirQualityDaoImpl implements AirQualityDao {
 	}
 
 	@Override
-	public HashMap<String,String> getPastDaysAirQuality(String city, int dayNum) {
+	public List<AirQuality> getPastDaysAirQuality(String city, int dayNum) {
 		int hourNum = dayNum*24;
-		String sql = "SELECT SUBSTRING(date,1,10) as dayStr,AVG(aqi) as avgAqi FROM air_quality WHERE date > DATE_FORMAT(DATE_SUB(NOW(), INTERVAL "+hourNum+" HOUR),'%Y_%m_%d_%H') and id LIKE '"+city+"%' GROUP BY dayStr ORDER BY dayStr ASC;";
-		Session session = getSession();
+		String sql = "SELECT *, SUBSTRING(date,1,10) as dayStr,AVG(aqi) as avgAqi FROM air_quality WHERE date > DATE_FORMAT(DATE_SUB(NOW(), INTERVAL "+hourNum+" HOUR),'%Y_%m_%d_%H') and id LIKE '"+city+"%' GROUP BY dayStr ORDER BY dayStr ASC;";
+        Session session = getSession();
         SQLQuery query = session.createSQLQuery(sql);
         //query.setResultTransformer(Transformers.aliasToBean(DayAqiModel.class));
         @SuppressWarnings("unchecked")
         List<Object[]> list = query.list();
-		HashMap<String,String> map = new HashMap<String,String>();
-        for(Object[] ob:list){
-        	String day = ob[0].toString();
-        	String aqi = ob[1].toString();
-        	map.put(day, aqi);
+
+        List<AirQuality> resultList = new ArrayList<>();
+        for (Object[] ob: list) {
+            String cityName = ob[2].toString();
+            String co = ob[3].toString();
+            String indexType = ob[5].toString();
+            String no2 = ob[6].toString();
+            String o3 = ob[7].toString();
+            String pm10 = ob[8].toString();
+            String pm25 = ob[9].toString();
+            String primPollu = ob[10].toString();
+            String so2 = ob[11].toString();
+            String date = ob[12].toString();
+            String aqi = String.valueOf(Math.rint((Double)ob[13]));
+
+            AirQuality airQuality = new AirQuality();
+            airQuality.setAqi(aqi);
+            airQuality.setDate(date);
+            airQuality.setCity_name(cityName);
+            airQuality.setCo(co);
+            airQuality.setPm25(pm25);
+            airQuality.setIndex_type(indexType);
+            airQuality.setNo2(no2);
+            airQuality.setO3(o3);
+            airQuality.setPm10(pm10);
+            airQuality.setPrim_pollu(primPollu);
+            airQuality.setSo2(so2);
+
+            resultList.add(airQuality);
         }
-        return map;
+//		HashMap<String,String> map = new HashMap<String,String>();
+//        for(Object[] ob:list){
+//        	String day = ob[0].toString();
+//        	String aqi = ob[1].toString();
+//        	map.put(day, aqi);
+//        }
+//        return map;
+        return resultList;
 	}
 }

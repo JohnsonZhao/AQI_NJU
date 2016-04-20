@@ -9,7 +9,7 @@
             </li>
             <li>
                 <div id="search" style="display: none;">
-                    <form action="${request.getContextPath()}/AirQuality/getCurrentAirQuality" method="get">
+                    <form action="${request.getContextPath()}/AirQuality/getCurrentAirQualityByChinese" method="get">
                         <input placeholder="Search City" id="city-name" class="form-control" type="text" name="city">
                     </form>
                 </div>

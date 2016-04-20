@@ -53,6 +53,15 @@ footer.page-footer {
     margin: 0;
 }
 
+.history-title {
+    position: relative;
+    margin-bottom: 1em;
+    font-size: 22px;
+    font-weight: 400;
+    text-align: left;
+}
+
+
 .section-title {
     position: relative;
     margin-bottom: 1em;
@@ -79,6 +88,28 @@ footer.page-footer {
     font-size: 24px;
 }
 
+.history-title:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    border-bottom: 4px solid #dddddd;
+}
+
+.history-title i {
+    color: #dddddd;
+    margin-right: 16px;
+    font-size: 32px;
+}
+
+.history-title span {
+    position: relative;
+    display: inline-block;
+    padding-right: 1.4em;
+    background-color: #fff;
+}
+
 .section-title span {
     position: relative;
     display: inline-block;
@@ -90,7 +121,6 @@ footer.page-footer {
     font-weight: bold;
     font-size: 50px;
 }
-
 
 #header #header-bottom {
     height: 65px;
@@ -107,11 +137,32 @@ footer.page-footer {
 .tabs {
     background-color: transparent;
 }
+
 .tabs .indicator {
-    background-color: rgb(29,181,171);
+    background-color: rgb(29, 181, 171);
 }
 
-.tabs .tab a{
+.tabs .tab a {
     color: #999;
     font-weight: bold;
+}
+
+.locate {
+    color: #FFF;
+    display: block;
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+}
+
+.ui-button {
+    display: block;
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    width: 160px;
+    margin: -20px 0 0 -80px;
+    z-index: 100;
+    text-align: center;
+    padding: 10px;
 }

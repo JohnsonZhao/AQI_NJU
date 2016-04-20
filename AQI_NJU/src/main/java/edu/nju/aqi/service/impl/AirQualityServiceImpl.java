@@ -6,7 +6,6 @@ import edu.nju.aqi.dao.LnltDao;
 import edu.nju.aqi.model.AirQuality;
 import edu.nju.aqi.model.Lnlt;
 import edu.nju.aqi.service.AirQualityService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -116,7 +115,7 @@ public class AirQualityServiceImpl implements AirQualityService {
 	}
 	
 	@Override
-	public HashMap<String,String> getPastDaysAirQuality(String city, int dayNum){
+	public List<AirQuality> getPastDaysAirQuality(String city, int dayNum){
 		return airQualityDao.getPastDaysAirQuality(city, dayNum);
 	}
 

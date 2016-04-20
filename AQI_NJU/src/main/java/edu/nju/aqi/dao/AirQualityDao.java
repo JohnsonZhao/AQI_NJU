@@ -2,7 +2,6 @@ package edu.nju.aqi.dao;
 
 import edu.nju.aqi.model.AirQuality;
 
-import java.util.HashMap;
 import java.util.List;
 
 public interface AirQualityDao {
@@ -19,7 +18,7 @@ public interface AirQualityDao {
 	
 	public List<AirQuality> getPastHoursAirQuality(String city, int hourNum);
 	
-	public HashMap<String,String> getPastDaysAirQuality(String city, int dayNum);
+	public List<AirQuality> getPastDaysAirQuality(String city, int dayNum);
 	
 	public List<AirQuality> getAllTodaysAirQuality();
 	

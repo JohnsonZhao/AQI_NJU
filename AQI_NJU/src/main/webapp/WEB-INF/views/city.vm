@@ -128,11 +128,12 @@
     <div class="section">
         <h2 class="header brown-text lighten-1 section-title">
             <span>
-                <i class="mdi-action-book"></i>
-                今日生活指南
+                <i class="material-icons">history</i>
+                历史数据
             </span>
         </h2>
-        <div class="row">
+        <div id="history-chart" style="height: 400px;">
+
         </div>
     </div>
 </div>
@@ -202,31 +203,41 @@
 <script type="text/javascript" src="../static/js/sea.js"></script>
 <script type="text/javascript" src="../static/js/common.js"></script>
 <script>
-    seajs.use(['nav', 'chart'], function (nav, chart) {
+    seajs.use(['nav', 'chart', 'table'], function (nav, chart, table) {
         var id = '${airQuality.id}';
         nav.toggleSearch();
         chart.makechart('chartdiv1', '${airQuality.id}');
         $('.parallax').parallax();
+        $('select').material_select();
         $('.modal-trigger').leanModal({
             dismissible: true,
             ready: function () {
                 $.getJSON('${request.getContextPath()}/MonitoringSites/getCurrentMonitoringSites', {city: id.split('_')[0]}, function (data) {
                     data.forEach(function (sitedata) {
                         var row = $('<tr>');
-                        var tharr = ['name','aqi','index_type','prim_pollu','pm25','pm10','co','no2','o3','so2'];
+                        var tharr = ['name', 'aqi', 'index_type', 'prim_pollu', 'pm25', 'pm10', 'co', 'no2', 'o3', 'so2'];
                         for (var key of tharr) {
-                            console.log(key);
                             var x = sitedata[key];
-                            row.append($('<td>'+x+'</td>'));
+                            row.append($('<td>' + x + '</td>'));
                         }
                         $('#monitor-table tbody').append(row);
                     });
                 })
             },
-            complete: function() {
+            complete: function () {
                 $('tbody').empty();
             }
         });
+
+##        $('#selection').change(function () {
+##            city = id.split('_')[0];
+##            dayNum = $('#selection').val();
+##            table.history('${request.getContextPath()}/AirQuality/getPastDaysAirQuality',city, dayNum);
+##        });
+
+        chart.historyChart('${request.getContextPath()}/AirQuality/getPastDaysAirQuality',id, 365);
+
+
 
 
     })

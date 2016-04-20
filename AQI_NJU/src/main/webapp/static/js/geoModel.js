@@ -51,6 +51,7 @@ define(function (require, exports) {
 
 
             cityFullInfo.properties = {
+                text: cityInfo.id.split('_')[0],
                 'marker-size': 'small',
                 aqi: cityInfo.aqi,
                 level: levelIntMap[cityInfo.indexType],
