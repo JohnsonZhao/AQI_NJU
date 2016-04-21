@@ -8,28 +8,30 @@ import java.util.List;
 
 public interface AirQualityService {
 
-	public AirQualityDao getAirQualityDao();
-	public void setAirQualityDao(AirQualityDao airQualityDao);
+	AirQualityDao getAirQualityDao();
+	void setAirQualityDao(AirQualityDao airQualityDao);
 	
-	public List<AirQuality> getAllAirQuality();
+	List<AirQuality> getAllAirQuality();
 	
-	public boolean addAirQuality(AirQuality airQuality);
+	boolean addAirQuality(AirQuality airQuality);
 
-	public boolean addAirQualityList(List<AirQuality> airQualityList);
+	boolean addAirQualityList(List<AirQuality> airQualityList);
 	
-	public List<AirQuality> getTodaysAirQuality(String city);
+	List<AirQuality> getTodaysAirQuality(String city);
 	
-	public List<AirQuality> getAllTodaysAirQuality();
+	List<AirQuality> getAllTodaysAirQuality();
 	
-	public AirQuality getCurrentAirQuality(String city);
+	AirQuality getCurrentAirQuality(String city);
 	
-	public AirQuality getCurrentAirQualityByChinese(String city);
+	AirQuality getCurrentAirQualityByChinese(String city);
 
 	List<AirQualityBo> getAllCurrentAirQuality();
 	
-	public List<AirQuality> get24HoursAirQuality(String city);
+	List<AirQuality> get24HoursAirQuality(String city);
 	
-	public List<AirQuality> getPastHoursAirQuality(String city, int hourNum);
+	List<AirQuality> getPastHoursAirQuality(String city, int hourNum);
 	
-	public List<AirQuality> getPastDaysAirQuality(String city, int dayNum);
+	List<AirQuality> getPastDaysAirQuality(String city, int dayNum);
+
+	List<AirQuality> getRelatedCities(String cityName);
 }

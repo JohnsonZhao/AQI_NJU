@@ -22,16 +22,54 @@
 
 <body>
     #parse("common/nav.vm")
+    #set($Integer = 0)
+    #set($aqiInt = $Integer.parseInt(${airQuality.aqi}))
+    #set($index_type = ${airQuality.index_type})
+    #if($aqiInt <50)
+        #set($color = "teal")
+        #set($level = "level1")
+        #set($tip = "空气很好，可以外出活动，呼吸新鲜空气。")
+    #elseif($aqiInt < 100)
+        #set($color = "yellow")
+        #set($level = 'level2')
+        #set($tip = "可以正常在户外活动，易敏感人群应减少外出。")
+    #elseif($aqiInt <150)
+        #set($color = "orange")
+        #set($level = "level3")
+        #set($index_type = "轻度污染")
+        #set($tip = "敏感人群症状易加剧，应避免高强度户外锻炼，外出时做好防护措施。")
+    #elseif($aqiInt < 200)
+        #set($color = "red")
+        #set($level = "level4")
+        #set($index_type = "中度污染")
+        #set($tip = "应减少户外活动，外出时佩戴口罩，敏感人群应尽量避免外出")
+    #elseif($aqiInt <300)
+        #set($color = "purple")
+        #set($level = "level5")
+        #set($index_type = "重度污染")
+        #set($tip = "应减少户外活动，外出时佩戴口罩，敏感人群应留在室内。")
+    #elseif($aqiInt <= 500)
+        #set($color = "deep-purple")
+        #set($level = "level6")
+        #set($index_type = "严重污染")
+        #set($tip = "应避免外出，敏感人群应留在室内，关好门窗。")
+    #end
 <div class="parallax-container valign-wrapper">
     <div class="section no-pad-bot">
         <div class="container">
             <br>
             <br>
-            <h1 class="header center valign">${airQuality.city_name}</h1>
+            <h1 class="header center valign ${level}">${airQuality.city_name}</h1>
+            <div class="gauge">
+                <span class="gauge_${level}">${index_type}</span>
+                <p class="gauge_img"></p>
+                <p class="gauge_num">0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;150&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;200&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;300&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500</p>
+                <p>温馨提示:&nbsp;  ${tip}</p>
+            </div>
         </div>
     </div>
     <div class="parallax">
-        <img src="../static/images/background3.jpg" style="display: block; transform: translate3d(-50%, 151px, 0px);">
+        <img src="../static/images/${level}.jpg" style="display: block; transform: translate3d(-50%, 151px, 0px);">
     </div>
 </div>
 
@@ -45,7 +83,7 @@
         </h2>
         <div class="row">
             <div class="col s12 m3">
-                <div class="card teal accent-4">
+                <div class="card ${color} accent-4">
                     <div class="card-content white-text">
                         <span class="card-title">$!{airQuality.aqi}</span>
                         <p>AQI</p>
@@ -53,39 +91,39 @@
                 </div>
             </div>
             <div class="col s12 m3">
-                <div class="card teal accent-4">
+                <div class="card ${color} accent-4">
                     <div class="card-content white-text">
                         <span class="card-title">$!{airQuality.pm25}</span>
-                        <p>PM2.5</p>
+                        <p>PM2.5/h</p>
                     </div>
                 </div>
             </div>
             <div class="col s12 m3">
-                <div class="card teal accent-4">
+                <div class="card ${color} accent-4">
                     <div class="card-content white-text">
                         <span class="card-title">$!{airQuality.pm10}</span>
-                        <p>PM10</p>
+                        <p>PM10/h</p>
                     </div>
                 </div>
             </div>
             <div class="col s12 m3">
-                <div class="card teal accent-4">
+                <div class="card ${color} accent-4">
                     <div class="card-content white-text">
                         <span class="card-title">$!{airQuality.co}</span>
-                        <p>CO</p>
+                        <p>CO/h</p>
                     </div>
                 </div>
             </div>
             <div class="col s12 m3">
-                <div class="card teal accent-4">
+                <div class="card ${color} accent-4">
                     <div class="card-content white-text">
                         <span class="card-title">$!{airQuality.no2}</span>
-                        <p>NO<sub>2</sub></p>
+                        <p>NO<sub>2</sub>/h</p>
                     </div>
                 </div>
             </div>
             <div class="col s12 m3">
-                <div class="card teal accent-4">
+                <div class="card ${color} accent-4">
                     <div class="card-content white-text">
                         <span class="card-title">$!{airQuality.o3}</span>
                         <p>O<sub>3</sub>/h</p>
@@ -93,7 +131,7 @@
                 </div>
             </div>
             <div class="col s12 m3">
-                <div class="card teal accent-4">
+                <div class="card ${color} accent-4">
                     <div class="card-content white-text">
                         <span class="card-title">$!{airQuality.so2}</span>
                         <p>SO<sub>2</sub>/h</p>
@@ -101,7 +139,7 @@
                 </div>
             </div>
             <div class="col s12 m3">
-                <div class="card teal accent-4">
+                <div class="card ${color} accent-4">
                     <a href="#monitorsites" class="modal-trigger">
                         <div class="card-content white-text">
                             <i class="material-icons" style="font-size: 40px;">add_circle_outline</i>
@@ -117,11 +155,12 @@
 <div class="parallax-container">
     <div class="section no-pad-bot">
         <div class="container">
-            <div id="chartdiv1" style=" height: 400px; "></div>
+            <div id="chartdiv1" style=" height: 400px; width: 100%;"></div>
         </div>
     </div>
-    <div class="parallax"><img src="../static/images/chartbg.jpg" alt="Unsplashed background img 3"
-                               style="display: block; transform: translate3d(-80%, 182px, 0px);"></div>
+    <div class="parallax" style="background-color: #f6f8f8">
+
+    </div>
 </div>
 
 <div class="container">
@@ -133,6 +172,21 @@
             </span>
         </h2>
         <div id="history-chart" style="height: 400px;">
+
+        </div>
+    </div>
+</div>
+<div style="background-color: #f6f8f8">
+    <div class="section">
+        <div class="container">
+            <h2 class="header brown-text lighten-1" id="related-city">
+                <i class="material-icons" style="color: #454d51; font-size: 40px; margin-right: 10px;">explore</i>
+                <span>相关城市</span>
+            </h2>
+            <a class="btn-large waves-effect waves-light red" href="#!">
+                南京
+            </a>
+
 
         </div>
     </div>
@@ -206,9 +260,8 @@
     seajs.use(['nav', 'chart', 'table'], function (nav, chart, table) {
         var id = '${airQuality.id}';
         nav.toggleSearch();
-        chart.makechart('chartdiv1', '${airQuality.id}');
+        chart.makechart('chartdiv1', '${airQuality.id}', '${request.getContextPath()}/forecast');
         $('.parallax').parallax();
-        $('select').material_select();
         $('.modal-trigger').leanModal({
             dismissible: true,
             ready: function () {
@@ -229,15 +282,7 @@
             }
         });
 
-##        $('#selection').change(function () {
-##            city = id.split('_')[0];
-##            dayNum = $('#selection').val();
-##            table.history('${request.getContextPath()}/AirQuality/getPastDaysAirQuality',city, dayNum);
-##        });
-
-        chart.historyChart('${request.getContextPath()}/AirQuality/getPastDaysAirQuality',id, 365);
-
-
+        chart.historyChart('${request.getContextPath()}/AirQuality/getPastDaysAirQuality', id, 365);
 
 
     })

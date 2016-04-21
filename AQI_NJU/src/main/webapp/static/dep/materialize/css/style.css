@@ -53,14 +53,6 @@ footer.page-footer {
     margin: 0;
 }
 
-.history-title {
-    position: relative;
-    margin-bottom: 1em;
-    font-size: 22px;
-    font-weight: 400;
-    text-align: left;
-}
-
 
 .section-title {
     position: relative;
@@ -103,12 +95,6 @@ footer.page-footer {
     font-size: 32px;
 }
 
-.history-title span {
-    position: relative;
-    display: inline-block;
-    padding-right: 1.4em;
-    background-color: #fff;
-}
 
 .section-title span {
     position: relative;
@@ -120,6 +106,12 @@ footer.page-footer {
 .card .card-title {
     font-weight: bold;
     font-size: 50px;
+}
+
+#related-city span{
+    font-size: 24px;
+    position: relative;
+    top: -10px;
 }
 
 #header #header-bottom {

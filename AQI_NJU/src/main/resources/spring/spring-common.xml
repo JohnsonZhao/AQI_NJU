@@ -38,6 +38,7 @@
 				<value>edu.nju.aqi.model.MonitoringSites</value>
 				<value>edu.nju.aqi.model.Lnlt</value>
 				<value>edu.nju.aqi.model.Weather</value>
+				<value>edu.nju.aqi.model.District</value>
 			</list>
 		</property>
 	</bean>

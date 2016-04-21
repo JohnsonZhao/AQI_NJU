@@ -120,5 +120,10 @@ public class AirQualityController {
         return modelAndView;
     }
 
+    @ResponseBody
+    @RequestMapping("/getRelatedCities")
+    public List<AirQuality> getRelatedCities(String cityName) {
+        return airQualityService.getRelatedCities(cityName);
+    }
 }
 

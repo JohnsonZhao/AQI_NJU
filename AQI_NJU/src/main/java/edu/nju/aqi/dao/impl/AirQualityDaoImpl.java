@@ -156,7 +156,18 @@ public class AirQualityDaoImpl implements AirQualityDao {
         return list;
     }
 
-	@Override
+    @Override
+    /**
+     * get aqi by city name list
+     */
+    public List<AirQuality> getAirQualityByNameList(List<String> nameList) {
+        Session session = getSession();
+        Query query = session.createQuery("from AirQuality as aq where city_name in (:nameList) and aq.date= (select max(date) from AirQuality)");
+        query.setParameterList("nameList", nameList);
+        return  query.list();
+    }
+
+    @Override
 	public List<AirQuality> get24HoursAirQuality(String city) {
 		String sql = "SELECT * FROM air_quality WHERE date > DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 DAY),'%Y_%m_%d_%H') and id LIKE '"+city+"%';";
 		Session session = getSession();

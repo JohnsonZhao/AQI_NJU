@@ -51,7 +51,6 @@ dalizhou 大理州
 dandong 丹东
 daqing 大庆
 datong 大同
-daxinganlingde 大兴安岭地
 daxinganlingdiqu 大兴安岭地区
 dazhou 达州
 dehongzhou 德宏州

@@ -10,7 +10,9 @@ define(function (require, exports) {
             });
             data.forEach(function (city_info, i) {
                 city_info.order = i + 1;
+                city_info.cityName = '<a href="getCurrentAirQualityByChinese?city='+city_info.cityName+'">'+city_info.cityName+'</a>';
             });
+            console.log(data);
             $('#current-table').dynatable({
                 features: {
                     recordCount: false,

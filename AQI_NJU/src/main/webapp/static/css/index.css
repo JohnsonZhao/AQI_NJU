@@ -111,6 +111,7 @@ nav {
     border-radius: 50%;
     margin: 10px 0px 5px 15px;
 }
+
 .leaflet-control-locate {
     background-size: 18px;
     width: 28px;
@@ -152,7 +153,6 @@ nav {
     font-size: 12px;
 }
 
-
 .zoom {
     background-color: #fff;
     border-bottom: 1px solid #ccc;
@@ -164,7 +164,7 @@ nav {
     line-height: 1.45 !important;
     text-align: center;
     text-decoration: none;
-    font: bold 18px'Lucida Console', Monaco, monospace;
+    font: bold 18px 'Lucida Console', Monaco, monospace;
 }
 
 .blur {
@@ -174,12 +174,82 @@ nav {
     filter: blur(10px);
 }
 
+.level1 {
+    color: white;
+}
+
+.level2 {
+    color: grey;
+}
+
+.level5 {
+    color: #8c8c8c;
+}
+
+.level6 {
+    color: #8c8c8c;
+}
+
+.gauge_img {
+    margin-top: 70px;
+    width: 235px;
+    height: 11px;
+    background: url(../images/citydate_sprite.png) -6px -4px no-repeat;
+}
+
+.gauge span {
+    display: block;
+    position: relative;
+    top: 60px;
+    width: 66px;
+    height: 25px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 12px;
+    background: url(../images/citydate_sprite.png) -257px -4px no-repeat;
+}
+
+.gauge_level1 {
+    color: green;
+    left: -15px;
+}
+
+.gauge_level2 {
+    color: yellow;
+    left: 25px;
+}
+
+.gauge_level3 {
+    color: orange;
+    left: 65px;
+}
+
+.gauge_level4 {
+    color: red;
+    left: 103px;
+}
+
+.gauge_level5 {
+    color: purple;
+    left: 142px;
+}
+
+.gauge_level6 {
+    color: #6200ea;
+    left: 180px;
+}
+
+.gauge_num {
+    font-size: 12px;
+    margin-top: -12px;
+}
+
 @charset "UTF-8";
 
 @font-face {
     font-family: "untitled-font-1";
-    src:url("../fonts/my-font-1.eot");
-    src:url("../fonts/my-font-1.eot?#iefix") format("embedded-opentype"),
+    src: url("../fonts/my-font-1.eot");
+    src: url("../fonts/my-font-1.eot?#iefix") format("embedded-opentype"),
     url("../fonts/my-font-1.woff") format("woff"),
     url("../fonts/my-font-1.ttf") format("truetype"),
     url("../fonts/my-font-1.svg#untitled-font-1") format("svg");
@@ -229,7 +299,7 @@ nav {
     font-style: normal;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) {
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
     @font-face {
         font-family: "Flaticon";
         src: url("../fonts/Flaticon.svg#Flaticon") format("svg");
@@ -244,5 +314,10 @@ nav {
     margin-left: 20px;
 }
 
-.flaticon-buildings:before { content: "\f100"; }
-.flaticon-food:before { content: "\f101"; }
+.flaticon-buildings:before {
+    content: "\f100";
+}
+
+.flaticon-food:before {
+    content: "\f101";
+}

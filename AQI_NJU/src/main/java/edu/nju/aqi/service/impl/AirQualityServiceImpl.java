@@ -2,8 +2,10 @@ package edu.nju.aqi.service.impl;
 
 import edu.nju.aqi.bo.AirQualityBo;
 import edu.nju.aqi.dao.AirQualityDao;
+import edu.nju.aqi.dao.DistrictDao;
 import edu.nju.aqi.dao.LnltDao;
 import edu.nju.aqi.model.AirQuality;
+import edu.nju.aqi.model.District;
 import edu.nju.aqi.model.Lnlt;
 import edu.nju.aqi.service.AirQualityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,10 @@ public class AirQualityServiceImpl implements AirQualityService {
 
     @Autowired
     private AirQualityDao airQualityDao;
-    @Autowired()
+    @Autowired
     private LnltDao lnltDao;
+    @Autowired
+    private DistrictDao districtDao;
 
     @Override
     public AirQualityDao getAirQualityDao() {
@@ -99,25 +103,45 @@ public class AirQualityServiceImpl implements AirQualityService {
         return resultList;
     }
 
-	@Override
-	public List<AirQuality> get24HoursAirQuality(String city) {
-		return airQualityDao.get24HoursAirQuality(city);
-	}
+    @Override
+    public List<AirQuality> get24HoursAirQuality(String city) {
+        return airQualityDao.get24HoursAirQuality(city);
+    }
 
-	@Override
-	public List<AirQuality> getPastHoursAirQuality(String city, int hourNum) {
-		return airQualityDao.getPastHoursAirQuality(city, hourNum);
-	}
+    @Override
+    public List<AirQuality> getPastHoursAirQuality(String city, int hourNum) {
+        return airQualityDao.getPastHoursAirQuality(city, hourNum);
+    }
 
-	@Override
-	public AirQuality getCurrentAirQualityByChinese(String city) {
-		return airQualityDao.getCurrentAirQualityByChinese(city);
-	}
-	
-	@Override
-	public List<AirQuality> getPastDaysAirQuality(String city, int dayNum){
-		return airQualityDao.getPastDaysAirQuality(city, dayNum);
-	}
+    @Override
+    public AirQuality getCurrentAirQualityByChinese(String city) {
+        return airQualityDao.getCurrentAirQualityByChinese(city);
+    }
 
+    @Override
+    public List<AirQuality> getPastDaysAirQuality(String city, int dayNum) {
+        return airQualityDao.getPastDaysAirQuality(city, dayNum);
+    }
+
+    /**
+     * get related city names and aqi
+     *
+     * @param cityName the main city's name
+     * @return List<AirQuality>
+     */
+    @Override
+    public List<AirQuality> getRelatedCities(String cityName) {
+        List<District> relatedCities = districtDao.getRelatedCities(cityName);
+        List<String> cityNameList = new ArrayList<>();
+        for (District district : relatedCities) {
+            cityNameList.add(district.getName());
+        }
+        List<AirQuality> airQualityList = airQualityDao.getAirQualityByNameList(cityNameList);
+        if (airQualityList == null) {
+            return new ArrayList<>();
+        } else {
+            return airQualityList;
+        }
+    }
 
 }

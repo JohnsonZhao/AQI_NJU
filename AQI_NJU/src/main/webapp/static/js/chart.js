@@ -5,49 +5,82 @@
  */
 
 define(function (require, exports) {
-    exports.makechart = function (location, city) {
+    var result = [];
+    exports.makechart = function (location, city, url) {
+        var cityName = city.split('_')[0];
         $.getJSON('getCityAQIHistory', {
-                city: city.split('_')[0]
+                city: cityName
             }, function (data) {
-                var result = [];
-                fomulateData(data, result);
-                AmCharts.makeChart(location, {
-                    type: 'serial',
-                    theme: 'chalk',
-                    dataProvider: result,
-                    //color: '#697E8C',
-                    titles: [
-                        {
-                            text: '24小时AQI指数实时变化',
-                            color: '#697E8C'
+                fomulateData(data);
+                $.getJSON(url, {
+                    city: cityName
+                }, function (data) {
+                    data.forEach(function (aqiInfo) {
+                        result.push({
+                            time: AmCharts.stringToDate(aqiInfo.date, 'YYYY_MM_DD_HH'),
+                            forecast: aqiInfo.aqi
+                        });
+                    });
+                    AmCharts.makeChart(location, {
+                        type: 'serial',
+                        theme: 'light',
+                        dataProvider: result,
+                        titles: [
+                            {
+                                text: '24小时AQI指数实时变化',
+                                color: '#697E8C'
+                            }
+                        ],
+                        categoryField: 'time',
+                        startDuration: 1,
+                        graphs: [
+                            {
+                                id: 'g1',
+                                title: '实时aqi',
+                                valueField: 'aqi',
+                                lineThickness: 2,
+                                fillAlphas: 0,
+                                bullet: "round",
+                                balloonText: "<b>aqi:[[aqi]]</b>"
+                            }, {
+                                id: 'g2',
+                                title: '预测aqi',
+                                valueField: 'forecast',
+                                lineThickness: 2,
+                                lineColor: '#67B7DC',
+                                bullet: 'round',
+                                dashLength: 5,
+                                balloonText: '<b>aqi: [[forecast]]</b>',
+                                hidden: true
+                            }
+                        ],
+                        categoryAxis: {
+                            parseDates: true,
+                            minPeriod: 'hh'
+                        },
+                        valueAxes: [{
+                            title: "aqi指数"
+                        }],
+                        chartScrollbar: {
+                            scrollbarHeight: 40,
+                            color: "#FFFFFF",
+                            autoGridCount: true,
+                            graph: "g1"
+                        },
+                        legend: {
+                            useGraphSettings: true,
+                        },
+                        chartCursor: {
+                            fullWidth: true,
+                            cursorAlpha: 0,
+                            valueLineAlpha: 0.2,
+                            categoryBalloonDateFormat: 'HH:00, MMM DD'
                         }
-                    ],
-                    categoryField: 'time',
-                    startDuration: 1,
-                    graphs: [
-                        {
-                            type: 'line',
-                            title: 'aqi',
-                            valueField: 'aqi',
-                            lineThickness: 2,
-                            fillAlphas: 0,
-                            bullet: "round",
-                            balloonText: "<b>aqi:[[aqi]]</b>"
-                        }
-                    ],
-                    categoryAxis: {
-                        gridPosition: "start"
-                    },
-                    valueAxes: [{
-                        title: "aqi指数"
-                    }],
-                    legend: {
-                        useGraphSettings: true
-                    }
+                    });
                 });
-                //makeCharts(data, 'chartDiv','chalk','#282828');
             }
         );
+
 
     };
 
@@ -56,7 +89,6 @@ define(function (require, exports) {
         var city = id.split('_')[0];
         $.getJSON(url, {city: city, dayNum: dayNum}, function (data) {
             generateData(data);
-            console.log(chartData);
             var chart = AmCharts.makeChart('history-chart', {
                 type: 'serial',
                 theme: 'light',
@@ -143,7 +175,7 @@ define(function (require, exports) {
                     useLineColorForBulletBorder: true,
                     hidden: true,
                     balloonText: '[[title]]<br/><b style="font-size: 130%">[[value]] mg/m3</b> '
-                },{
+                }, {
                     id: 'g5',
                     title: 'no2/h',
                     valueAxis: 'v1',
@@ -158,7 +190,7 @@ define(function (require, exports) {
                     useLineColorForBulletBorder: true,
                     hidden: true,
                     balloonText: '[[title]]<br/><b style="font-size: 130%">[[value]] μg/m3</b> '
-                },{
+                }, {
                     id: 'g6',
                     title: 'so2/h',
                     valueAxis: 'v1',
@@ -195,13 +227,11 @@ define(function (require, exports) {
                     borderThickness: 1,
                     shadowAlpha: 0
                 }
-            })
+            });
         });
-        chart.addListener('dataUpdated', zoomChart);
     };
 
     function generateData(data) {
-        console.log(data);
         data.forEach(function (aqiInfo) {
             var date = AmCharts.stringToDate(aqiInfo.date, 'YYYY_MM_DD');
             var aqi = aqiInfo.aqi;
@@ -222,10 +252,10 @@ define(function (require, exports) {
         });
     }
 
-    function fomulateData(data, result) {
+    function fomulateData(data) {
         data.forEach(function (aqiInfo) {
             var chart_data = {
-                time: aqiInfo.date.split('_')[3] + '时',
+                time: AmCharts.stringToDate(aqiInfo.date, 'YYYY_MM_DD_HH'),
                 aqi: aqiInfo.aqi
             };
 

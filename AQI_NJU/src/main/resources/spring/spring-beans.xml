@@ -17,8 +17,13 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
+	<bean id="LnltDao" class="edu.nju.aqi.dao.impl.LnltDaoImpl">
+	</bean>
 
-	<bean id="AirQualityService" class="edu.nju.aqi.service.impl.AirQualityServiceImpl">
+	<bean id="DistrictDao" class="edu.nju.aqi.dao.impl.DistrictDaoImpl">
+
+	</bean>
+ 	<bean id="AirQualityService" class="edu.nju.aqi.service.impl.AirQualityServiceImpl">
 		<property name="AirQualityDao">
 			<ref bean="AirQualityDao" />
 		</property>
