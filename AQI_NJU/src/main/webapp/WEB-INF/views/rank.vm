@@ -62,14 +62,14 @@
 </nav>
 <div id="rank-row" class="row">
     <div class="container">
-        <div class="col s12">
-            <ul class="tabs">
-                <li class="col s3 tab"><a class="active" href="#current">实时排行</a></li>
-                <li class="col s3 tab"><a href="#yesterday">昨日排行</a></li>
-                <li class="col s3 tab"><a href="#sevendays">7天排行</a></li>
-                <li class="col s3 tab"><a href="#thirtydays">30天排行</a></li>
-            </ul>
-        </div>
+##        <div class="col s12">
+##            <ul class="tabs">
+##                <li class="col s3 tab"><a class="active" href="#current">实时排行</a></li>
+##                <li class="col s3 tab"><a href="#yesterday">昨日排行</a></li>
+##                <li class="col s3 tab"><a href="#sevendays">7天排行</a></li>
+##                <li class="col s3 tab"><a href="#thirtydays">30天排行</a></li>
+##            </ul>
+##        </div>
         <div id="current">
             <table id="current-table">
                 <thead>
@@ -88,9 +88,9 @@
             </table>
 
         </div>
-        <div id="yesterday">yesterday</div>
-        <div id="sevendays">sevendays</div>
-        <div id="thirtydays">thirtydays</div>
+##        <div id="yesterday">yesterday</div>
+##        <div id="sevendays">sevendays</div>
+##        <div id="thirtydays">thirtydays</div>
     </div>
 
 </div>

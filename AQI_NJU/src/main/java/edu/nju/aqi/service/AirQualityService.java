@@ -34,4 +34,6 @@ public interface AirQualityService {
 	List<AirQuality> getPastDaysAirQuality(String city, int dayNum);
 
 	List<AirQuality> getRelatedCities(String cityName);
+
+    String getCityProvince(String cityName);
 }

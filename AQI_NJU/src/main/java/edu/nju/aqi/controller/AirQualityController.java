@@ -67,7 +67,9 @@ public class AirQualityController {
     public ModelAndView getCurrentAirQuality(String city) {
         ModelAndView modelAndView = new ModelAndView("city");
         AirQuality airQuality = airQualityService.getCurrentAirQuality(city);
+        String province = airQualityService.getCityProvince(city);
         modelAndView.getModel().put("airQuality", airQuality);
+        modelAndView.getModel().put("province", province);
         return modelAndView;
     }
 
@@ -120,10 +122,17 @@ public class AirQualityController {
         return modelAndView;
     }
 
+    /**
+     * 获取相关城市的aqi
+     * @param cityName
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/getRelatedCities")
     public List<AirQuality> getRelatedCities(String cityName) {
         return airQualityService.getRelatedCities(cityName);
     }
+
+
 }
 

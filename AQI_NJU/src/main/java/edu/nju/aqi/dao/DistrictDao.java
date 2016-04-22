@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface DistrictDao {
     List<District> getRelatedCities(String cityName);
+
+    String getCityProvince(String cityName);
 }

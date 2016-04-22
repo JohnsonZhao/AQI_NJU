@@ -244,6 +244,11 @@ nav {
     margin-top: -12px;
 }
 
+.city-btn {
+    width: 180px;
+    margin: 8px 15px;
+}
+
 @charset "UTF-8";
 
 @font-face {

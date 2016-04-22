@@ -11,10 +11,7 @@ import edu.nju.aqi.service.AirQualityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class AirQualityServiceImpl implements AirQualityService {
@@ -25,6 +22,9 @@ public class AirQualityServiceImpl implements AirQualityService {
     private LnltDao lnltDao;
     @Autowired
     private DistrictDao districtDao;
+
+    private static final List<String> municipalityList = Arrays.asList("shanghai", "beijing", "tianjin", "chongqing");
+    private static final List<String> municipalityNameList = Arrays.asList("上海", "北京", "天津", "重庆");
 
     @Override
     public AirQualityDao getAirQualityDao() {
@@ -84,6 +84,9 @@ public class AirQualityServiceImpl implements AirQualityService {
 
         for (AirQuality airQuality : airQualityList) {
             String cityName = airQuality.getCity_name();
+            String indexType = airQuality.getIndex_type();
+            if (indexType.equals("unknown"))
+                continue;
             if (nameToCoordinateMap.keySet().contains(cityName)) {
                 AirQualityBo bo = new AirQualityBo();
                 bo.setId(airQuality.getId());
@@ -126,22 +129,39 @@ public class AirQualityServiceImpl implements AirQualityService {
     /**
      * get related city names and aqi
      *
-     * @param cityName the main city's name
+     * @param cityName pinyin
      * @return List<AirQuality>
      */
     @Override
     public List<AirQuality> getRelatedCities(String cityName) {
-        List<District> relatedCities = districtDao.getRelatedCities(cityName);
         List<String> cityNameList = new ArrayList<>();
-        for (District district : relatedCities) {
-            cityNameList.add(district.getName());
+        List<AirQuality> resultList;
+
+        // 如果是直辖市,则直接返回;否则,查询数据库中得到该省城市
+        if (municipalityList.contains(cityName)) {
+            cityNameList = municipalityNameList;
+        } else {
+            List<District> relatedCities = districtDao.getRelatedCities(cityName);
+            // 如果为空,则返回空的list
+            if (relatedCities == null || relatedCities.size() == 0)
+                return new ArrayList<>();
+            for (District district : relatedCities) {
+                if (!district.getPinyin().equals(cityName))
+                    cityNameList.add(district.getName());
+            }
         }
-        List<AirQuality> airQualityList = airQualityDao.getAirQualityByNameList(cityNameList);
-        if (airQualityList == null) {
+
+        resultList = airQualityDao.getAirQualityByNameList(cityNameList);
+        if (resultList == null) {
             return new ArrayList<>();
         } else {
-            return airQualityList;
+            return resultList;
         }
+    }
+
+    @Override
+    public String getCityProvince(String cityName) {
+        return districtDao.getCityProvince(cityName);
     }
 
 }

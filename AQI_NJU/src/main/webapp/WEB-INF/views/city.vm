@@ -181,45 +181,16 @@
         <div class="container">
             <h2 class="header brown-text lighten-1" id="related-city">
                 <i class="material-icons" style="color: #454d51; font-size: 40px; margin-right: 10px;">explore</i>
-                <span>相关城市</span>
+                <span>$!{province} &nbsp;相关城市</span>
             </h2>
-            <a class="btn-large waves-effect waves-light red" href="#!">
-                南京
-            </a>
+            <div  class="row" id="related-aqi">
 
+            </div>
 
         </div>
     </div>
 </div>
 
-<footer class="page-footer teal lighten-2">
-    <div class="container">
-        <div class="row">
-            <div class="col l9 s12">
-                <h5 class="white-text">Company Bio</h5>
-                <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's
-                    our full time job. Any amount would help support and continue development on this project and is
-                    greatly appreciated.</p>
-
-
-            </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">Connect</h5>
-                <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
-                    <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container">
-            Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-        </div>
-    </div>
-</footer>
 
 
 <!-- Modal Structure -->
@@ -257,8 +228,9 @@
 <script type="text/javascript" src="../static/js/sea.js"></script>
 <script type="text/javascript" src="../static/js/common.js"></script>
 <script>
+    var id = '${airQuality.id}';
+    var pinyin = id.split('_')[0];
     seajs.use(['nav', 'chart', 'table'], function (nav, chart, table) {
-        var id = '${airQuality.id}';
         nav.toggleSearch();
         chart.makechart('chartdiv1', '${airQuality.id}', '${request.getContextPath()}/forecast');
         $('.parallax').parallax();
@@ -285,6 +257,28 @@
         chart.historyChart('${request.getContextPath()}/AirQuality/getPastDaysAirQuality', id, 365);
 
 
+    });
+
+    $(function () {
+        $.getJSON('${request.getContextPath()}/AirQuality/getRelatedCities', {cityName: pinyin}, function (data) {
+            data.forEach(function(aqi_info){
+                var name = aqi_info.city_name;
+                var aqi = aqi_info.aqi;
+                var a = $('<a>');
+                var color;
+                if (aqi < 50) color = 'teal';
+                else if (aqi< 100) color = 'yellow';
+                else if (aqi < 150) color ='orange';
+                else if (aqi < 200) color = 'red';
+                else if (aqi < 300) color = 'purple';
+                else color = 'deep-purple';
+
+                a.addClass('btn-large city-btn ' + color +' accent-4');
+                a.attr('href', '${request.getContextPath()}/AirQuality/getCurrentAirQualityByChinese?city='+name);
+                a.text(name + ': ' + aqi);
+                $('#related-aqi').append(a);
+            })
+        })
     })
 </script>
 </body>
