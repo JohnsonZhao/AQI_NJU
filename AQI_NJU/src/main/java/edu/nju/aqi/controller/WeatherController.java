@@ -28,21 +28,41 @@ public class WeatherController {
 		return weatherService.getCurrentWeather(city);
 	}
 
+    /**
+     * 预测某个城市的aqi (异步获取,用于city中的图表展示)
+     * @param city
+     * @return
+     */
     @ResponseBody
 	@RequestMapping("/forecast")
 	public List<AirQuality> getForcast(String city) {
 		List<AirQuality> airQualities = analysisService.predict(city);
         return airQualities;
 	}
-	
+
+    /**
+     * 返回两城市之间aqi的关联程度
+     * @param cityName1
+     * @param cityName2
+     * @return
+     */
+    @ResponseBody
 	@RequestMapping("/correlation")
-	public String getCorrelation(String cityName1, String cityName2, HttpServletRequest request){
-		String name1 = "baoji";
-		String name2 = "baoji";
-		AreaCorrelation result = (AreaCorrelation) analysisService.getCorrelation(name1, name2);
-		System.out.println(result.toString());
-		List<IndexCorrelation> indexCorrelations = analysisService.getCorrelation(name1);
-		System.err.println(indexCorrelations.toString());
-		return "/login";
+	public AreaCorrelation getCorrelation(String cityName1, String cityName2){
+		AreaCorrelation result = (AreaCorrelation) analysisService.getCorrelation(cityName1, cityName2);
+        return result;
+//		List<IndexCorrelation> indexCorrelations = analysisService.getCorrelation(cityName1);
+//		System.err.println(indexCorrelations.toString());
 	}
+
+    /**
+     * 返回某个城市各种指数之间的关联
+     * @param cityName
+     * @return
+     */
+	@ResponseBody
+    @RequestMapping("/indexCorrelation")
+    public List<IndexCorrelation> getIndexCorrelation(String cityName) {
+        return analysisService.getCorrelation(cityName);
+    }
 }

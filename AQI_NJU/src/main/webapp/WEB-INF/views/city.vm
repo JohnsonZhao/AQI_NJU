@@ -12,11 +12,10 @@
     <title>MyAQI</title>
 
     <!-- CSS  -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="../static/dep/materialize/css/materialize.css" type="text/css" rel="stylesheet"
           media="screen,projection"/>
     <link href="../static/dep/materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet'/>
+    <link href='../static/dep/mapbox/mapbox.css' rel='stylesheet'/>
     <link href='../static/css/index.css' rel='stylesheet'/>
 </header>
 
@@ -81,6 +80,11 @@
                 空气详情
             </span>
         </h2>
+        <div class="row" style="margin: -10px 0px">
+            <div class="col offset-s9">
+                <blockquote>单位:&nbsp;μg/m³(CO为mg/m³)</blockquote>
+            </div>
+        </div>
         <div class="row">
             <div class="col s12 m3">
                 <div class="card ${color} accent-4">

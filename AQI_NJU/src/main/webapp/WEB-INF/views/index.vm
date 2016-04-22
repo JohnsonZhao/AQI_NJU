@@ -12,10 +12,11 @@
     <title>MyAQI</title>
 
     <!-- CSS  -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+##    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="static/dep/materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="static/dep/materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet'/>
+##    <link href='https://api.mapbox.c/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet'/>
+    <link href="static/dep/mapbox/mapbox.css" rel="stylesheet"/>
     <link href='static/css/index.css' rel='stylesheet'/>
 </header>
 <body>

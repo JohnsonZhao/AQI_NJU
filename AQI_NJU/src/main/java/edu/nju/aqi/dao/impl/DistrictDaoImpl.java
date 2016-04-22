@@ -35,6 +35,14 @@ public class DistrictDaoImpl implements DistrictDao {
         return (String)query.uniqueResult();
     }
 
+    @Override
+    public String getCityProvinceByChinese(String chineseName) {
+        String sql = "select name from district where id = (select parentid from district where name ='"+chineseName+"')";
+        Session session = getSession();
+        SQLQuery query = session.createSQLQuery(sql);
+        return (String)query.uniqueResult();
+    }
+
     private Session getSession() throws HibernateException {
         Session session = sessionFactory.getCurrentSession();
         if (session == null) {

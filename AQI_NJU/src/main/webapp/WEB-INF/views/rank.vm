@@ -17,7 +17,7 @@
           media="screen,projection"/>
     <link href="../static/dep/materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="../static/dep/dynatable/dynatable.css" type="text/css" rel="stylesheet"/>
-    <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet'/>
+    <link href='../static/dep/mapbox/mapbox.css' rel='stylesheet'/>
     <link href='../static/css/index.css' rel='stylesheet'/>
 </header>
 

@@ -53,7 +53,8 @@ public class AirQualityController {
         ModelAndView modelAndView = new ModelAndView("city");
 
         AirQuality airQuality = airQualityService.getCurrentAirQualityByChinese(city);
-        System.out.println(airQuality);
+        String province = airQualityService.getCityProvinceByChinese(city);
+        modelAndView.getModel().put("province", province);
         modelAndView.getModel().put("airQuality", airQuality);
         return modelAndView;
     }

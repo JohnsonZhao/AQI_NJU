@@ -146,7 +146,7 @@ public class AirQualityServiceImpl implements AirQualityService {
             if (relatedCities == null || relatedCities.size() == 0)
                 return new ArrayList<>();
             for (District district : relatedCities) {
-                if (!district.getPinyin().equals(cityName))
+                if (district != null)
                     cityNameList.add(district.getName());
             }
         }
@@ -162,6 +162,11 @@ public class AirQualityServiceImpl implements AirQualityService {
     @Override
     public String getCityProvince(String cityName) {
         return districtDao.getCityProvince(cityName);
+    }
+
+    @Override
+    public String getCityProvinceByChinese(String cityName) {
+        return districtDao.getCityProvinceByChinese(cityName);
     }
 
 }

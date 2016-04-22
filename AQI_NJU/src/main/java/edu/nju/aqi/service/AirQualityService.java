@@ -36,4 +36,6 @@ public interface AirQualityService {
 	List<AirQuality> getRelatedCities(String cityName);
 
     String getCityProvince(String cityName);
+
+    String getCityProvinceByChinese(String cityName);
 }
