@@ -3,7 +3,7 @@ package edu.nju.aqi.analysis.helper;
 import edu.nju.aqi.analysis.AbstractCorrelation;
 
 /**
- * 区域指数比较程度
+ * 区域指数比较，默认以AQI作为比较基准
  * @author: margine
  * @time: 2016年4月15日
  */
@@ -22,6 +22,18 @@ public class IndexCorrelation extends AbstractCorrelation{
 		setCorrealtion(correlation);
 	}
 	
+	/**
+	 * 获取比较的基准属性，默认为AQI
+	 * @return
+	 */
+	public String getBaseKey(){
+		return this.baseKey;
+	}
+	
+	/**
+	 * 获取参与比较的属性，如SO2，NO2，CO等属性
+	 * @return
+	 */
 	public String getCompareKey(){
 		return this.compareKey;
 	}
@@ -31,6 +43,7 @@ public class IndexCorrelation extends AbstractCorrelation{
 		return this.desc;
 	}
 	
+	@Override
 	public String toString(){
 		return this.desc;
 	}

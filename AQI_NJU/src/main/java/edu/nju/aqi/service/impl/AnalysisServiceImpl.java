@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import edu.nju.aqi.analysis.AbstractCorrelation;
 import edu.nju.aqi.analysis.ICorrelationAnalysis;
 import edu.nju.aqi.analysis.IPrediction;
 import edu.nju.aqi.analysis.helper.AreaCorrelation;
@@ -38,7 +37,7 @@ public class AnalysisServiceImpl implements AnalysisService{
 	
 	
 	@Override
-	public AbstractCorrelation getCorrelation(String city1, String city2) {
+	public AreaCorrelation getCorrelation(String city1, String city2) {
 		AreaCorrelation degree = corrlation.getCorrelation(city1, city2);
 		StringBuffer buffer = new StringBuffer(degree.getDesc());
 		buffer.append("\n similarity is ");

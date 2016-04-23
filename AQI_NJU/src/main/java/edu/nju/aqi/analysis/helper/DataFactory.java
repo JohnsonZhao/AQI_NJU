@@ -74,7 +74,9 @@ public class DataFactory {
 	}
 	
 	public double[] getHistoryAqis(String cityName){
-		List<AirQuality> airQualities = airQualityDao.getPastHoursAirQuality(cityName, 1000);
+		/**时间间隔，以一个月计算*/
+		int intervels = 24*30;
+		List<AirQuality> airQualities = airQualityDao.getPastHoursAirQuality(cityName, intervels);
 		double[] values = new double[airQualities.size()];
 		int i = 0;
 		for(int j = 0; j< airQualities.size(); j++){
@@ -89,10 +91,8 @@ public class DataFactory {
 					continue;
 				}
 			}
-			
 			values[i++] = value;
 		}
-		
 		return values;
 	}
 
