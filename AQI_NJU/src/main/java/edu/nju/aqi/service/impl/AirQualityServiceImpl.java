@@ -1,5 +1,6 @@
 package edu.nju.aqi.service.impl;
 
+import edu.nju.aqi.analysis.helper.AreaCorrelation;
 import edu.nju.aqi.bo.AirQualityBo;
 import edu.nju.aqi.dao.AirQualityDao;
 import edu.nju.aqi.dao.DistrictDao;
@@ -8,10 +9,13 @@ import edu.nju.aqi.model.AirQuality;
 import edu.nju.aqi.model.District;
 import edu.nju.aqi.model.Lnlt;
 import edu.nju.aqi.service.AirQualityService;
+import edu.nju.aqi.service.AnalysisService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.Map.Entry;
 
 @Service
 public class AirQualityServiceImpl implements AirQualityService {
@@ -22,10 +26,13 @@ public class AirQualityServiceImpl implements AirQualityService {
     private LnltDao lnltDao;
     @Autowired
     private DistrictDao districtDao;
+    @Autowired
+    private AnalysisService analysisService;
 
     private static final List<String> municipalityList = Arrays.asList("shanghai", "beijing", "tianjin", "chongqing");
     private static final List<String> municipalityNameList = Arrays.asList("上海", "北京", "天津", "重庆");
-
+    private static final int MOST_SIMILAR_NUM = 5;
+    
     @Override
     public AirQualityDao getAirQualityDao() {
         return airQualityDao;
@@ -168,5 +175,66 @@ public class AirQualityServiceImpl implements AirQualityService {
     public String getCityProvinceByChinese(String cityName) {
         return districtDao.getCityProvinceByChinese(cityName);
     }
+
+	@Override
+	public List<Map.Entry<AirQuality,Double>> getSimilarCitiesInProvince(String city) {
+		List<String> cityNameList = new ArrayList<String>();
+
+        // 如果是直辖市,则直接返回;否则,查询数据库中得到该省城市
+        if (municipalityList.contains(city)) {
+            cityNameList = municipalityList;
+        } else {
+            List<District> relatedCities = districtDao.getCitiesInProvince(city);
+            for (District district : relatedCities) {
+                if (district != null)
+                    cityNameList.add(district.getPinyin());
+            }
+        }
+        //HashMap<AirQuality,AreaCorrelation> similarities = new HashMap<AirQuality,AreaCorrelation>();
+        HashMap<AirQuality, Double> ret = new HashMap<AirQuality,Double>();
+        for(int i=0;i<cityNameList.size();i++){
+        	AreaCorrelation areaCorrelation = (AreaCorrelation) analysisService.getCorrelation(city, cityNameList.get(i));
+        	AirQuality airQuality = airQualityDao.getCurrentAirQuality(cityNameList.get(i));
+        	//similarities.put(airQuality, areaCorrelation);
+        	ret.put(airQuality, areaCorrelation.getSimilar());
+        }
+        
+        /*List<Map.Entry<AirQuality,AreaCorrelation>> infoIds =
+        	    new ArrayList<Map.Entry<AirQuality,AreaCorrelation>>(similarities.entrySet());
+        //sort by the similar value of to area correlations
+        Collections.sort(infoIds, new Comparator<Map.Entry<AirQuality,AreaCorrelation>>() {   
+			@Override
+			public int compare(Entry<AirQuality, AreaCorrelation> o1,
+					Entry<AirQuality, AreaCorrelation> o2) {
+				if ((o2.getValue().getSimilar()-o1.getValue().getSimilar())>0)  
+			          return 1;  
+			        else if((o2.getValue().getSimilar()-o1.getValue().getSimilar())==0)  
+			          return 0;  
+			        else   
+			          return -1;
+			}
+        }); */
+        /*for(AirQuality aq:similarities.keySet()){
+        		ret.put(aq, similarities.get(aq).getSimilar());
+        }*/
+        List<Map.Entry<AirQuality,Double>> infoIds2 =
+        	    new ArrayList<Map.Entry<AirQuality,Double>>(ret.entrySet());
+        //sort by the similar value of to area correlations
+        Collections.sort(infoIds2, new Comparator<Map.Entry<AirQuality,Double>>() {   
+			@Override
+			public int compare(Entry<AirQuality, Double> o1,
+					Entry<AirQuality, Double> o2) {
+				 return  o2.getValue()>o1.getValue()?1:-1;
+			}
+        });
+        /*HashMap<AirQuality,Double> result = new HashMap<AirQuality,Double>();
+        for(Map.Entry<AirQuality, Double> entry : infoIds2){
+        	result.put(entry.getKey(), entry.getValue());
+        }*/
+        /*for(int i=0;i<infoIds2.size();i++){
+        	result.put(infoIds2.get(i).getKey(), infoIds2.get(i).getValue());
+        }*/
+		return infoIds2;
+	}
 
 }

@@ -2,6 +2,7 @@ package edu.nju.aqi.dao.impl;
 
 import edu.nju.aqi.dao.DistrictDao;
 import edu.nju.aqi.model.District;
+
 import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -24,6 +25,17 @@ public class DistrictDaoImpl implements DistrictDao {
         SQLQuery query = session.createSQLQuery(sql);
         query.addEntity(District.class);
         List<District> districtList = query.list();
+        return districtList;
+    }
+    
+    @Override
+    public List<District> getCitiesInProvince(String cityName) {
+        String sql = "select id,name,parentid,initial,initials,pinyin,parent from district WHERE parentid IN (SELECT parentid from district where pinyin='"+cityName+"')";
+        Session session = getSession();
+        SQLQuery query = session.createSQLQuery(sql);
+        query.addEntity(District.class);
+        @SuppressWarnings("unchecked")
+		List<District> districtList = query.list();
         return districtList;
     }
 

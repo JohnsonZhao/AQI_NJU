@@ -1,10 +1,13 @@
 package edu.nju.aqi.service;
 
+import edu.nju.aqi.analysis.helper.AreaCorrelation;
 import edu.nju.aqi.bo.AirQualityBo;
 import edu.nju.aqi.dao.AirQualityDao;
 import edu.nju.aqi.model.AirQuality;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface AirQualityService {
 
@@ -38,4 +41,6 @@ public interface AirQualityService {
     String getCityProvince(String cityName);
 
     String getCityProvinceByChinese(String cityName);
+    
+    List<Map.Entry<AirQuality,Double>> getSimilarCitiesInProvince(String cityName);
 }

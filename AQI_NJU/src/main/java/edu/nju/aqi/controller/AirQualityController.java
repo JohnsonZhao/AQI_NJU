@@ -1,8 +1,10 @@
 package edu.nju.aqi.controller;
 
+import edu.nju.aqi.analysis.helper.AreaCorrelation;
 import edu.nju.aqi.bo.AirQualityBo;
 import edu.nju.aqi.model.AirQuality;
 import edu.nju.aqi.service.AirQualityService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,7 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/AirQuality")
@@ -134,6 +139,22 @@ public class AirQualityController {
         return airQualityService.getRelatedCities(cityName);
     }
 
+    @ResponseBody
+    @RequestMapping("/getSimilarCities")
+    /**
+     * 是按照similar属性的降序排列的，第一个是其自身，值为1.0000
+     * sorted by desc order of similar attribute, the first element is itself(similar=1.0000)
+     * @param cityName
+     * @return
+     */
+    public List<Map.Entry<AirQuality,Double>> getSimilarCities(String cityName){
+    	/* 对于这个list中每一项的获取方式
+    	 * for(int i=0;i<infoIds2.size();i++){
+         *   //infoIds2.get(i).getKey(), infoIds2.get(i).getValue();
+         * }
+         */
+    	return airQualityService.getSimilarCitiesInProvince(cityName);
+    }
 
 }
 
