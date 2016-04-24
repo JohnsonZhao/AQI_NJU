@@ -4,6 +4,7 @@ import java.util.Vector;
 
 /**
  * ARIMA模型
+ * 
  * @author: margine
  * @time: 2016年4月13日
  */
@@ -21,20 +22,21 @@ public class ARIMA {
 		this.originalData = originalData;
 		this.period = period;
 	}
-	
+
 	/**
 	 * 获取下一个Period的预测值集合
+	 * 
 	 * @return
 	 */
-	public int[] getPredictValues(){
+	public int[] getPredictValues() {
 		int[] model = getARIMAmodel();
 		double predictValue = predictValue(model[0], model[1]);
 		int[] results = new int[period];
 		int len = originalData.length;
-		double prefixValue = predictValue * avgsumData + avgsumData;
-		for(int i = 0; i< period; i++){
-			//对结果进行反差分处理
-			results[i] = (int) (prefixValue + originalData[len - period + i-1]);
+		double prefixValue = predictValue * stderrDara + avgsumData;
+		for (int i = 0; i < period; i++) {
+			// 对结果进行反差分处理
+			results[i] = (int) (prefixValue + originalData[len - period + i]);
 		}
 		return results;
 	}
@@ -51,8 +53,8 @@ public class ARIMA {
 		}
 
 		// Z-Score
-		avgsumData = armamath.avgData(tempData);
-		stderrDara = armamath.stderrData(tempData);
+		avgsumData = armamath.avgData(tempData);// 平均数
+		stderrDara = armamath.stderrData(tempData);// 标准差
 
 		for (int i = 0; i < tempData.length; i++) {
 			tempData[i] = (tempData[i] - avgsumData) / stderrDara;
@@ -63,6 +65,7 @@ public class ARIMA {
 
 	/**
 	 * 获取ARIM模型
+	 * 
 	 * @return
 	 */
 	private int[] getARIMAmodel() {
@@ -186,7 +189,7 @@ public class ARIMA {
 			return n * Math.log(sumerr / (n - (p - 1))) + (p + q - 1) * Math.log(n);
 		}
 	}
-	
+
 	/**
 	 * 进一步预测
 	 * 
@@ -218,15 +221,15 @@ public class ARIMA {
 					err[j] = err[j - 1];
 				}
 				if (k == n)
-					predict = (int) (err[0] - temp); // ����Ԥ��
+					predict = (int) (err[0] - temp);
 				else
 					err[0] = stdoriginalData[k] - (err[0] - temp);
 			}
 		} else if (q == 0) {
 			double[] arPara = bestarmaARMAcoe.get(0);
-			
+
 			System.out.println("begin:");
-			for(int i = 0; i< arPara.length; i++){
+			for (int i = 0; i < arPara.length; i++) {
 				System.out.println(arPara[i]);
 			}
 
@@ -235,14 +238,14 @@ public class ARIMA {
 				for (int i = 0; i < p - 1; i++) {
 					temp += arPara[i] * stdoriginalData[k - i - 1];
 				}
-				double param0 = arPara[p-1];
-				if (Double.compare(0.0, param0) >0) {
+				double param0 = arPara[p - 1];
+				if (Double.compare(0.0, param0) > 0) {
 					temp -= Math.sqrt(-param0);
-				}else{
+				} else {
 					temp += Math.sqrt(param0);
 				}
 			}
-			predict =  temp;
+			predict = temp;
 
 		} else {
 
